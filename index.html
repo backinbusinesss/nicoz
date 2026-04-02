@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NICOZ — Portfolio</title>
+  <meta name="description" content="Nicoz — Web Developer & Designer. Building fast, beautiful digital experiences." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- CURSOR -->
+  <div id="cursor"></div>
+  <div id="cursor-trail"></div>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-text">
+      <span>N</span><span>I</span><span>C</span><span>O</span><span>Z</span>
+    </div>
+    <div class="loader-bar-wrap"><div class="loader-bar-fill"></div></div>
+  </div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#hero" class="nav-logo">NZ</a>
+    <div class="nav-links">
+      <a href="#projects" class="nav-link">Work</a>
+      <a href="#about"    class="nav-link">About</a>
+      <a href="#contact"  class="nav-link">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">Hire me</a>
+  </nav>
+
+  <!-- ═══════════════════════════════════════
+       HERO
+  ════════════════════════════════════════ -->
+  <section id="hero">
+    <canvas id="three-bg"></canvas>
+    <div class="hero-grid-overlay"></div>
+
+    <div class="hero-inner">
+      <p class="hero-eyebrow"><span class="blink-dot"></span> Available for work</p>
+
+      <h1 class="hero-name">
+        <span class="glitch" data-text="NICOZ">NICOZ</span>
+      </h1>
+
+      <p class="hero-role">
+        <span class="role-word">Web</span>
+        <span class="role-sep">·</span>
+        <span class="role-word">Developer</span>
+        <span class="role-sep">&amp;</span>
+        <span class="role-word">Designer</span>
+      </p>
+
+      <p class="hero-desc">
+        I build <em>fast</em>, <em>beautiful</em> and <em>memorable</em><br/>
+        digital experiences from scratch.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#projects" class="btn-glow">
+          <span>View my work</span>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-11.25a.75.75 0 00-1.5 0v4.59L7.3 9.27a.75.75 0 00-1.1 1.02l3.25 3.5a.75.75 0 001.1 0l3.25-3.5a.75.75 0 10-1.1-1.02l-1.95 2.1V6.75z" clip-rule="evenodd"/></svg>
+        </a>
+        <a href="#contact" class="btn-ghost">Let's talk</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <span>scroll</span>
+      <div class="scroll-line-anim"></div>
+    </div>
+
+    <!-- floating tech tags -->
+    <div class="hero-tag-float" style="top:22%;left:7%;">JavaScript</div>
+    <div class="hero-tag-float" style="top:30%;right:8%;">Three.js</div>
+    <div class="hero-tag-float" style="bottom:28%;left:5%;">GSAP</div>
+    <div class="hero-tag-float" style="bottom:22%;right:6%;">CSS</div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span>Web Development</span><span class="msep">✦</span>
+      <span>UI Design</span><span class="msep">✦</span>
+      <span>JavaScript</span><span class="msep">✦</span>
+      <span>Three.js</span><span class="msep">✦</span>
+      <span>Frontend</span><span class="msep">✦</span>
+      <span>Creative Code</span><span class="msep">✦</span>
+      <span>Web Development</span><span class="msep">✦</span>
+      <span>UI Design</span><span class="msep">✦</span>
+      <span>JavaScript</span><span class="msep">✦</span>
+      <span>Three.js</span><span class="msep">✦</span>
+      <span>Frontend</span><span class="msep">✦</span>
+      <span>Creative Code</span><span class="msep">✦</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       PROJECTS — 3D SCROLL ZOOM
+  ════════════════════════════════════════ -->
+  <div id="projects-wrapper">
+    <div id="projects-sticky">
+
+      <!-- Ambient background label -->
+      <div class="proj-bg-label">
+        <div class="proj-bg-num" id="projBgNum">01</div>
+        <div class="proj-bg-name" id="projBgName">Disinfecting</div>
+      </div>
+
+      <!-- Section title (fades out once scroll starts) -->
+      <div class="proj-intro" id="projIntro">
+        <span class="section-eyebrow">Selected Work</span>
+        <h2 class="proj-intro-title">My <em>Projects</em></h2>
+        <p>Scroll to fly through</p>
+      </div>
+
+      <!-- 3D STAGE -->
+      <div class="stage-3d" id="stage3d">
+
+        <!-- CARD 0 — DISINFECTING -->
+        <div class="pcard" id="pcard-0">
+          <div class="pcard-browser">
+            <div class="browser-chrome">
+              <span class="bc-dot" style="background:#ff5f57"></span>
+              <span class="bc-dot" style="background:#febc2e"></span>
+              <span class="bc-dot" style="background:#28c840"></span>
+              <div class="bc-url">disinfecting.kidnap.lol</div>
+            </div>
+            <div class="browser-body dis-screen">
+              <!-- DISINFECTING MOCKUP -->
+              <div class="dis-nav">
+                <span class="dis-logo">🎬 DISINFECTING</span>
+                <div class="dis-nav-links">
+                  <span>Movies</span><span>Series</span><span>Search</span>
+                </div>
+              </div>
+              <div class="dis-hero">
+                <div class="dis-badge">FREE STREAMING</div>
+                <div class="dis-hero-title">Watch Movies &<br/>Series for Free</div>
+                <div class="dis-hero-sub">1080p · No ads · Open Source</div>
+                <div class="dis-btn">▶ Start Watching</div>
+              </div>
+              <div class="dis-grid">
+                <div class="dis-poster" style="background:linear-gradient(135deg,#1a1a2e,#16213e);">
+                  <div class="poster-shimmer"></div>
+                </div>
+                <div class="dis-poster" style="background:linear-gradient(135deg,#2d1b69,#11998e);">
+                  <div class="poster-shimmer"></div>
+                </div>
+                <div class="dis-poster" style="background:linear-gradient(135deg,#c0392b,#8e44ad);">
+                  <div class="poster-shimmer"></div>
+                </div>
+                <div class="dis-poster" style="background:linear-gradient(135deg,#0f3460,#533483);">
+                  <div class="poster-shimmer"></div>
+                </div>
+                <div class="dis-poster" style="background:linear-gradient(135deg,#1b4332,#40916c);">
+                  <div class="poster-shimmer"></div>
+                </div>
+                <div class="dis-poster" style="background:linear-gradient(135deg,#4a0e8f,#d63031);">
+                  <div class="poster-shimmer"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pcard-info">
+            <div class="pcard-top">
+              <span class="pcard-index">01</span>
+              <div class="pcard-tags">
+                <span>TMDB API</span><span>VixSrc</span><span>Open Source</span>
+              </div>
+            </div>
+            <h3 class="pcard-title">Disinfecting</h3>
+            <p class="pcard-desc">Free streaming platform for movies &amp; TV series. 1080p quality, powered by VixSrc API and TMDB. Fully open-source and self-hostable.</p>
+            <a href="https://disinfecting.kidnap.lol" target="_blank" rel="noopener" class="pcard-visit">
+              Visit Site <span class="visit-arrow">→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- CARD 1 — SNIPEX -->
+        <div class="pcard" id="pcard-1">
+          <div class="pcard-browser">
+            <div class="browser-chrome">
+              <span class="bc-dot" style="background:#ff5f57"></span>
+              <span class="bc-dot" style="background:#febc2e"></span>
+              <span class="bc-dot" style="background:#28c840"></span>
+              <div class="bc-url">snipex.lol</div>
+            </div>
+            <div class="browser-body snipex-screen">
+              <!-- SNIPEX MOCKUP -->
+              <div class="snx-header">
+                <div class="snx-logo">⚡ SNIPEX</div>
+                <div class="snx-nav"><span>Pricing</span><span>API</span><span>Login</span></div>
+              </div>
+              <div class="snx-hero">
+                <div class="snx-title">Discord Username<br/><span class="snx-accent">Availability Checker</span></div>
+                <div class="snx-sub">Check &amp; snipe rare usernames instantly</div>
+                <div class="snx-input-wrap">
+                  <div class="snx-input">Enter Discord username...</div>
+                  <div class="snx-btn">Check</div>
+                </div>
+              </div>
+              <div class="snx-plans">
+                <div class="snx-plan">
+                  <div class="snx-plan-name">Bronze</div>
+                  <div class="snx-plan-price">€7.99<span>/mo</span></div>
+                  <div class="snx-plan-feat">500 checks</div>
+                </div>
+                <div class="snx-plan featured">
+                  <div class="snx-plan-badge">POPULAR</div>
+                  <div class="snx-plan-name">Silver</div>
+                  <div class="snx-plan-price">€19.99<span>/mo</span></div>
+                  <div class="snx-plan-feat">2000 checks</div>
+                </div>
+                <div class="snx-plan">
+                  <div class="snx-plan-name">Gold</div>
+                  <div class="snx-plan-price">€39.99<span>/mo</span></div>
+                  <div class="snx-plan-feat">Unlimited</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pcard-info">
+            <div class="pcard-top">
+              <span class="pcard-index">02</span>
+              <div class="pcard-tags">
+                <span>Discord API</span><span>SaaS</span><span>Node.js</span>
+              </div>
+            </div>
+            <h3 class="pcard-title">SnipeX</h3>
+            <p class="pcard-desc">Discord username availability checker and sniper. Tiered subscription model from €7.99 to unlimited. Features proxy access, wordlist upload, and full API integration.</p>
+            <a href="https://snipex.lol" target="_blank" rel="noopener" class="pcard-visit">
+              Visit Site <span class="visit-arrow">→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- CARD 2 — KIDNAP.LOL -->
+        <div class="pcard" id="pcard-2">
+          <div class="pcard-browser">
+            <div class="browser-chrome">
+              <span class="bc-dot" style="background:#ff5f57"></span>
+              <span class="bc-dot" style="background:#febc2e"></span>
+              <span class="bc-dot" style="background:#28c840"></span>
+              <div class="bc-url">kidnap.lol</div>
+            </div>
+            <div class="browser-body kidnap-screen">
+              <!-- KIDNAP.LOL MOCKUP -->
+              <div class="knp-nav">
+                <span class="knp-logo">kidnap.lol</span>
+                <div class="knp-nav-links"><span>Products</span><span>Docs</span><span>Login</span></div>
+              </div>
+              <div class="knp-hero">
+                <div class="knp-badge">🔮 Your Digital Tools Hub</div>
+                <div class="knp-title">Build &amp; Stream<br/><span class="knp-accent">Without Limits</span></div>
+                <div class="knp-sub">Powerful tools for the modern web</div>
+              </div>
+              <div class="knp-cards">
+                <div class="knp-card">
+                  <div class="knp-card-icon">⚡</div>
+                  <div class="knp-card-name">SnipeX</div>
+                  <div class="knp-card-desc">Username checker</div>
+                  <div class="knp-card-link">snipex.lol →</div>
+                </div>
+                <div class="knp-card">
+                  <div class="knp-card-icon">🎬</div>
+                  <div class="knp-card-name">Disinfecting</div>
+                  <div class="knp-card-desc">Free streaming</div>
+                  <div class="knp-card-link">disinfecting.kidnap.lol →</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pcard-info">
+            <div class="pcard-top">
+              <span class="pcard-index">03</span>
+              <div class="pcard-tags">
+                <span>Hub</span><span>Glassmorphism</span><span>JavaScript</span>
+              </div>
+            </div>
+            <h3 class="pcard-title">kidnap.lol</h3>
+            <p class="pcard-desc">Main hub showcasing all projects. Dark glassmorphic UI with animated particles, gradient overlays, and a clean two-product landing page.</p>
+            <a href="https://kidnap.lol" target="_blank" rel="noopener" class="pcard-visit">
+              Visit Site <span class="visit-arrow">→</span>
+            </a>
+          </div>
+        </div>
+
+      </div><!-- /stage-3d -->
+
+      <!-- Progress dots -->
+      <div class="proj-dots" id="projDots">
+        <button class="pdot active" data-i="0"></button>
+        <button class="pdot" data-i="1"></button>
+        <button class="pdot" data-i="2"></button>
+      </div>
+
+      <!-- Scroll hint within projects -->
+      <div class="proj-scroll-hint" id="projScrollHint">
+        <span>keep scrolling</span>
+      </div>
+
+    </div><!-- /projects-sticky -->
+  </div><!-- /projects-wrapper -->
+
+  <!-- ═══════════════════════════════════════
+       ABOUT
+  ════════════════════════════════════════ -->
+  <section id="about">
+    <div class="about-inner">
+      <div class="about-left">
+        <span class="section-eyebrow">About me</span>
+        <h2>I'm <em>Nicoz</em>,<br/>a developer<br/>who cares about<br/><em>details</em>.</h2>
+        <a href="#contact" class="btn-glow small">Work with me</a>
+      </div>
+      <div class="about-right">
+        <p class="about-bio">
+          I build web experiences that are fast, visually striking, and
+          crafted with attention to every pixel. From streaming platforms
+          to SaaS tools, I ship products people actually enjoy using.
+        </p>
+        <div class="skills-grid">
+          <div class="skill-group">
+            <h4>Frontend</h4>
+            <div class="skill-chips">
+              <span>HTML/CSS</span><span>JavaScript</span><span>Three.js</span><span>GSAP</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>Backend</h4>
+            <div class="skill-chips">
+              <span>Node.js</span><span>APIs</span><span>Discord.js</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>Tools</h4>
+            <div class="skill-chips">
+              <span>Git</span><span>Figma</span><span>VS Code</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-stats">
+          <div class="astat">
+            <span class="astat-n">3+</span>
+            <span class="astat-l">Projects live</span>
+          </div>
+          <div class="astat">
+            <span class="astat-n">100%</span>
+            <span class="astat-l">Custom code</span>
+          </div>
+          <div class="astat">
+            <span class="astat-n">∞</span>
+            <span class="astat-l">Passion</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CONTACT
+  ════════════════════════════════════════ -->
+  <section id="contact">
+    <div class="contact-inner">
+      <span class="section-eyebrow">Get in touch</span>
+      <h2 class="contact-title">Let's build<br/>something <em>great</em>.</h2>
+      <p class="contact-sub">Have a project in mind? Let's talk.</p>
+      <div class="contact-links">
+        <a href="https://t.me/kidnapdev" target="_blank" rel="noopener" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg>
+          Telegram
+        </a>
+        <a href="https://kidnap.lol" target="_blank" rel="noopener" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          kidnap.lol
+        </a>
+        <a href="https://github.com/backinbusinesss" target="_blank" rel="noopener" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+    <div class="contact-bg-text">NICOZ</div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <span>© 2025 Nicoz — Built from scratch with ♥</span>
+    <span>kidnap.lol</span>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="js/three-bg.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
