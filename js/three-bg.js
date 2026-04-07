@@ -66,24 +66,43 @@
   });
   scene.add(new THREE.Points(cyanGeo, cyanMat));
 
+  // ── DEPTH WARP RINGS ──
+  for (let r = 0; r < 6; r++) {
+    const ringGeo = new THREE.TorusGeometry(16 + r * 8, 0.05, 6, 80);
+    const ringMat = new THREE.LineBasicMaterial({
+      color: 0x7c3aed, transparent: true, opacity: Math.max(0.005, 0.032 - r * 0.004)
+    });
+    const ring = new THREE.LineSegments(new THREE.EdgesGeometry(ringGeo), ringMat);
+    ring.rotation.x = Math.PI / 2;
+    ring.position.z = -20 - r * 14;
+    scene.add(ring);
+  }
+
   // ── WIREFRAME GEOMETRIES ──
-  const eMat = (opacity = 0.18) => new THREE.LineBasicMaterial({
+  const eMat = (opacity = 0.22) => new THREE.LineBasicMaterial({
     color: 0x7c3aed, transparent: true, opacity
   });
+  const eMatCyan = (opacity = 0.14) => new THREE.LineBasicMaterial({
+    color: 0x06d6a0, transparent: true, opacity
+  });
   const shapes = [];
-  const addWire = (geo, pos, rot, rx, ry) => {
-    const m = new THREE.LineSegments(new THREE.EdgesGeometry(geo), eMat());
+  const addWire = (geo, pos, rot, rx, ry, mat) => {
+    const m = new THREE.LineSegments(new THREE.EdgesGeometry(geo), mat || eMat());
     m.position.set(...pos);
     m.rotation.set(...rot);
     scene.add(m);
     shapes.push({ m, rx, ry });
   };
 
-  addWire(new THREE.IcosahedronGeometry(3, 0),   [12, 4, -20],   [0.3, 0.5, 0],   0.003, 0.004);
-  addWire(new THREE.OctahedronGeometry(2, 0),     [-14, -3, -18], [0.5, 0.3, 0.1], 0.004, 0.003);
-  addWire(new THREE.TetrahedronGeometry(1.8, 0),  [5, -6, -12],   [0.2, 0.8, 0.3], 0.005, 0.003);
-  addWire(new THREE.BoxGeometry(2, 2, 2),         [-8, 5, -15],   [0.4, 0.4, 0],   0.003, 0.005);
-  addWire(new THREE.TorusGeometry(2, 0.4, 8, 16), [16, -5, -22],  [1.2, 0.3, 0],   0.004, 0.002);
+  addWire(new THREE.IcosahedronGeometry(3.2, 0),  [12, 4, -20],   [0.3, 0.5, 0],   0.003, 0.004);
+  addWire(new THREE.OctahedronGeometry(2.2, 0),   [-14, -3, -18], [0.5, 0.3, 0.1], 0.004, 0.003);
+  addWire(new THREE.TetrahedronGeometry(2, 0),    [5, -6, -12],   [0.2, 0.8, 0.3], 0.005, 0.003);
+  addWire(new THREE.BoxGeometry(2.2, 2.2, 2.2),   [-8, 5, -15],   [0.4, 0.4, 0],   0.003, 0.005);
+  addWire(new THREE.TorusGeometry(2.2, 0.4, 8, 16), [16, -5, -22], [1.2, 0.3, 0],  0.004, 0.002);
+  // extra shapes
+  addWire(new THREE.DodecahedronGeometry(1.8, 0), [-5, 7, -14],   [0.6, 0.2, 0.4], 0.003, 0.004, eMat(0.16));
+  addWire(new THREE.TorusGeometry(1.4, 0.3, 6, 12), [-18, 6, -24], [0.8, 0.4, 0.2], 0.005, 0.003, eMatCyan(0.12));
+  addWire(new THREE.OctahedronGeometry(1.4, 0),   [18, 7, -16],   [0.3, 0.7, 0.1], 0.004, 0.005, eMatCyan(0.10));
 
   // ── MOUSE PARALLAX ──
   const mouse = { x: 0, y: 0 };
@@ -133,6 +152,10 @@
     // drift stars slowly
     stars.rotation.y = t * 0.006;
     stars.rotation.x = t * 0.003;
+
+    // pulse glow particles
+    glowMat.opacity = 0.45 + Math.sin(t * 0.8) * 0.08;
+    cyanMat.opacity = 0.35 + Math.cos(t * 0.6) * 0.06;
 
     renderer.render(scene, camera);
   }

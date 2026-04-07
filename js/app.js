@@ -54,9 +54,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const cards     = Array.from(document.querySelectorAll('.pcard'));
   const bgNum     = document.getElementById('projBgNum');
   const bgName    = document.getElementById('projBgName');
+  const bgLabel   = bgNum ? bgNum.closest('.proj-bg-label') : null;
   const intro     = document.getElementById('projIntro');
   const dots      = Array.from(document.querySelectorAll('.pdot'));
   const scrollHint= document.getElementById('projScrollHint');
+  const projLeak  = document.getElementById('projLeak');
+  const psnFill   = document.getElementById('psnFill');
+  const psnItems  = Array.from(document.querySelectorAll('.psn-item'));
+  const sideNav   = document.getElementById('projSideNav');
 
   const CARD_NAMES = ['Disinfecting', 'SnipeX', 'kidnap.lol'];
   const N = cards.length;
@@ -73,9 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Make the stage preserve 3D
   gsap.set(stage, { transformStyle: 'preserve-3d', perspective: 1100 });
 
-  // Wrapper height = 100vh (sticky) + N * 2 * 100vh scrollable
-  // Already set via CSS as 500vh for 3 cards
-
   let currentCard = -1;
 
   const tl = gsap.timeline({
@@ -88,6 +90,12 @@ document.addEventListener('DOMContentLoaded', () => {
       anticipatePin: 1,
       onUpdate: self => {
         const p = self.progress; // 0 → 1
+
+        // Show/hide side nav
+        if (sideNav) sideNav.classList.toggle('visible', p > 0.02 && p < 0.99);
+
+        // Update side nav fill
+        if (psnFill) psnFill.style.height = (Math.min(p, 0.98) / 0.98 * 100) + '%';
 
         // fade out intro
         if (p > 0.02) {
@@ -102,10 +110,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const idx = Math.min(Math.floor(p * N), N - 1);
         if (idx !== currentCard) {
           currentCard = idx;
-          // update bg label
-          if (bgNum) bgNum.textContent = String(idx + 1).padStart(2, '0');
-          if (bgName) bgName.textContent = CARD_NAMES[idx] || '';
-          // update dots
+
+          // Animated bg label swap
+          if (bgLabel) {
+            bgLabel.classList.add('changing');
+            setTimeout(() => {
+              if (bgNum) bgNum.textContent = String(idx + 1).padStart(2, '0');
+              if (bgName) bgName.textContent = CARD_NAMES[idx] || '';
+              bgLabel.classList.remove('changing');
+            }, 180);
+          }
+
+          // Per-project theme
+          sticky.classList.remove('theme-0', 'theme-1', 'theme-2');
+          sticky.classList.add('theme-' + idx);
+
+          // Light leak flash (only after first card)
+          if (projLeak && currentCard >= 0) {
+            projLeak.classList.remove('flash');
+            void projLeak.offsetWidth; // force reflow
+            projLeak.classList.add('flash');
+          }
+
+          // Update side nav
+          psnItems.forEach((it, i) => it.classList.toggle('active', i === idx));
+          // update bottom dots
           dots.forEach((d, i) => d.classList.toggle('active', i === idx));
           // mark active card
           cards.forEach((c, i) => c.classList.toggle('active', i === idx));
@@ -150,6 +179,28 @@ document.addEventListener('DOMContentLoaded', () => {
       window.scrollTo({ top: targetY, behavior: 'smooth' });
     });
   });
+
+  // Side nav click
+  psnItems.forEach((item, i) => {
+    item.addEventListener('click', () => {
+      const wrapperTop = wrapper.getBoundingClientRect().top + window.scrollY;
+      const total      = window.innerHeight * N * 2;
+      window.scrollTo({ top: wrapperTop + (i / N) * total + 10, behavior: 'smooth' });
+    });
+  });
+
+  // Scroll velocity blur on stage
+  let lastSY = window.scrollY;
+  let blurTimer;
+  window.addEventListener('scroll', () => {
+    const delta = Math.abs(window.scrollY - lastSY);
+    lastSY = window.scrollY;
+    if (delta > 7 && stage) {
+      stage.classList.add('fast-scroll');
+      clearTimeout(blurTimer);
+      blurTimer = setTimeout(() => stage && stage.classList.remove('fast-scroll'), 200);
+    }
+  }, { passive: true });
 
   // ── PAGE TRANSITIONS ──
   const overlay = document.createElement('div');
