@@ -231,4 +231,82 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ── SCROLL PROGRESS BAR ──
+  const progressBar = document.getElementById('scroll-progress');
+  if (progressBar) {
+    window.addEventListener('scroll', () => {
+      const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+      progressBar.style.width = pct + '%';
+    }, { passive: true });
+  }
+
+  // ── SPOTLIGHT CURSOR ──
+  const spotlight = document.getElementById('spotlight');
+  if (spotlight) {
+    window.addEventListener('mousemove', e => {
+      spotlight.style.setProperty('--mx', e.clientX + 'px');
+      spotlight.style.setProperty('--my', e.clientY + 'px');
+    }, { passive: true });
+  }
+
+  // ── MAGNETIC BUTTONS ──
+  document.querySelectorAll('.btn-glow, .btn-ghost, .nav-cta').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const rect = btn.getBoundingClientRect();
+      const x = (e.clientX - rect.left - rect.width  / 2) * 0.28;
+      const y = (e.clientY - rect.top  - rect.height / 2) * 0.28;
+      gsap.to(btn, { x, y, duration: 0.3, ease: 'power2.out' });
+    });
+    btn.addEventListener('mouseleave', () => {
+      gsap.to(btn, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.5)' });
+    });
+  });
+
+  // ── STATS COUNTER ──
+  const statEls = document.querySelectorAll('.astat-n[data-count]');
+  if (statEls.length) {
+    const countObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = +el.dataset.count;
+        const suffix = el.dataset.suffix || '';
+        gsap.to({ val: 0 }, {
+          val: target, duration: 1.6, ease: 'power2.out',
+          onUpdate: function () {
+            el.textContent = Math.round(this.targets()[0].val) + suffix;
+          },
+          onComplete: () => { el.textContent = target + suffix; }
+        });
+        countObs.unobserve(el);
+      });
+    }, { threshold: 0.6 });
+    statEls.forEach(el => countObs.observe(el));
+  }
+
+  // ── TEXT SCRAMBLE ON HERO NAME HOVER ──
+  const heroGlitch = document.querySelector('.hero-name .glitch');
+  if (heroGlitch) {
+    const ORIG = 'NICOZ';
+    const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&';
+    let scrambleInterval = null;
+    heroGlitch.addEventListener('mouseenter', () => {
+      let iter = 0;
+      clearInterval(scrambleInterval);
+      scrambleInterval = setInterval(() => {
+        const txt = ORIG.split('').map((l, i) =>
+          i < iter ? ORIG[i] : CHARS[Math.floor(Math.random() * CHARS.length)]
+        ).join('');
+        heroGlitch.textContent = txt;
+        heroGlitch.setAttribute('data-text', txt);
+        if (iter >= ORIG.length) {
+          clearInterval(scrambleInterval);
+          heroGlitch.textContent = ORIG;
+          heroGlitch.setAttribute('data-text', ORIG);
+        }
+        iter += 0.35;
+      }, 38);
+    });
+  }
+
 });

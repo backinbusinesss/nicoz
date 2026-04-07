@@ -12,6 +12,12 @@
 </head>
 <body>
 
+  <!-- SCROLL PROGRESS -->
+  <div id="scroll-progress"></div>
+
+  <!-- SPOTLIGHT -->
+  <div id="spotlight"></div>
+
   <!-- CURSOR -->
   <div id="cursor"></div>
   <div id="cursor-trail"></div>
@@ -41,6 +47,12 @@
   <section id="hero">
     <canvas id="three-bg"></canvas>
     <div class="hero-grid-overlay"></div>
+    <!-- AURORA BLOBS -->
+    <div class="hero-aurora">
+      <div class="aurora-blob"></div>
+      <div class="aurora-blob"></div>
+      <div class="aurora-blob"></div>
+    </div>
 
     <div class="hero-inner">
       <p class="hero-eyebrow"><span class="blink-dot"></span> Available for work</p>
@@ -347,11 +359,11 @@
         </div>
         <div class="about-stats">
           <div class="astat">
-            <span class="astat-n">3+</span>
+            <span class="astat-n" data-count="3" data-suffix="+">0+</span>
             <span class="astat-l">Projects live</span>
           </div>
           <div class="astat">
-            <span class="astat-n">100%</span>
+            <span class="astat-n" data-count="100" data-suffix="%">0%</span>
             <span class="astat-l">Custom code</span>
           </div>
           <div class="astat">
