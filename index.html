@@ -3,431 +3,672 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NICOZ — Portfolio</title>
-  <meta name="description" content="Nicoz — Web Developer & Designer. Building fast, beautiful digital experiences." />
+  <title>Nicoz — Web Developer &amp; Designer</title>
+  <meta name="description" content="Nicoz — independent web developer and designer. Frontend engineering, 3D and motion. Selected work: Sponky Squad, Autopsy, Disinfecting, SnipeX." />
+  <meta name="theme-color" content="#08080c" />
+  <meta name="color-scheme" content="dark" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Nicoz — Web Developer &amp; Designer" />
+  <meta property="og:description" content="Fast, memorable digital experiences built from scratch." />
+  <meta property="og:url" content="https://backinbusinesss.github.io/nicoz/" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2308080c'/%3E%3Ctext x='32' y='43' font-family='Helvetica,Arial,sans-serif' font-size='30' font-weight='700' text-anchor='middle' fill='%237c3aed'%3ENZ%3C/text%3E%3C/svg%3E" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
+<body data-page="home">
 
-  <!-- SCROLL PROGRESS -->
-  <div id="scroll-progress"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- SPOTLIGHT -->
-  <div id="spotlight"></div>
-
-  <!-- CURSOR -->
-  <div id="cursor"></div>
-  <div id="cursor-trail"></div>
-
-  <!-- LOADER -->
-  <div id="loader">
-    <div class="loader-text">
-      <span>N</span><span>I</span><span>C</span><span>O</span><span>Z</span>
-    </div>
-    <div class="loader-bar-wrap"><div class="loader-bar-fill"></div></div>
+  <!-- ══ PRELOADER ══ -->
+  <div id="loader" aria-hidden="true">
+    <div class="loader-mark">NICOZ</div>
+    <div class="loader-track"><span class="loader-fill"></span></div>
+    <p class="loader-meta">Portfolio — 2026</p>
   </div>
 
-  <!-- NAV -->
-  <nav id="nav">
-    <a href="#hero" class="nav-logo">NZ</a>
-    <div class="nav-links">
-      <a href="#projects" class="nav-link">Work</a>
-      <a href="#about"    class="nav-link">About</a>
-      <a href="#contact"  class="nav-link">Contact</a>
-    </div>
-    <a href="#contact" class="nav-cta">Hire me</a>
-  </nav>
+  <!-- ══ AMBIENT LAYERS ══ -->
+  <div id="spotlight" aria-hidden="true"></div>
+  <div id="cursor" aria-hidden="true"><span class="cursor-dot"></span></div>
 
-  <!-- ═══════════════════════════════════════
-       HERO
-  ════════════════════════════════════════ -->
-  <section id="hero">
-    <canvas id="three-bg"></canvas>
-    <div class="hero-grid-overlay"></div>
-    <!-- AURORA BLOBS -->
-    <div class="hero-aurora">
-      <div class="aurora-blob"></div>
-      <div class="aurora-blob"></div>
-      <div class="aurora-blob"></div>
-    </div>
+  <!-- ══ HEADER ══ -->
+  <header id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo" aria-label="Nicoz — home">
+        <span class="nav-logo-mark">NZ</span>
+        <span class="nav-logo-word">Nicoz</span>
+      </a>
 
-    <div class="hero-inner">
-      <p class="hero-eyebrow"><span class="blink-dot"></span> Available for work</p>
-
-      <h1 class="hero-name">
-        <span class="glitch" data-text="NICOZ">NICOZ</span>
-      </h1>
-
-      <p class="hero-role">
-        <span class="role-word">Web</span>
-        <span class="role-sep">·</span>
-        <span class="role-word">Developer</span>
-        <span class="role-sep">&amp;</span>
-        <span class="role-word">Designer</span>
-      </p>
-
-      <p class="hero-desc">
-        I build <em>fast</em>, <em>beautiful</em> and <em>memorable</em><br/>
-        digital experiences from scratch.
-      </p>
-
-      <div class="hero-cta">
-        <a href="#projects" class="btn-glow">
-          <span>View my work</span>
-          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-11.25a.75.75 0 00-1.5 0v4.59L7.3 9.27a.75.75 0 00-1.1 1.02l3.25 3.5a.75.75 0 001.1 0l3.25-3.5a.75.75 0 10-1.1-1.02l-1.95 2.1V6.75z" clip-rule="evenodd"/></svg>
-        </a>
-        <a href="#contact" class="btn-ghost">Let's talk</a>
-      </div>
-    </div>
-
-    <div class="hero-scroll-hint">
-      <span>scroll</span>
-      <div class="scroll-line-anim"></div>
-    </div>
-
-    <!-- floating tech tags -->
-    <div class="hero-tag-float" style="top:22%;left:7%;">JavaScript</div>
-    <div class="hero-tag-float" style="top:30%;right:8%;">Three.js</div>
-    <div class="hero-tag-float" style="bottom:28%;left:5%;">GSAP</div>
-    <div class="hero-tag-float" style="bottom:22%;right:6%;">CSS</div>
-  </section>
-
-  <!-- MARQUEE -->
-  <div class="marquee-strip">
-    <div class="marquee-track">
-      <span>Web Development</span><span class="msep">✦</span>
-      <span>UI Design</span><span class="msep">✦</span>
-      <span>JavaScript</span><span class="msep">✦</span>
-      <span>Three.js</span><span class="msep">✦</span>
-      <span>Frontend</span><span class="msep">✦</span>
-      <span>Creative Code</span><span class="msep">✦</span>
-      <span>Web Development</span><span class="msep">✦</span>
-      <span>UI Design</span><span class="msep">✦</span>
-      <span>JavaScript</span><span class="msep">✦</span>
-      <span>Three.js</span><span class="msep">✦</span>
-      <span>Frontend</span><span class="msep">✦</span>
-      <span>Creative Code</span><span class="msep">✦</span>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════
-       PROJECTS — 3D SCROLL ZOOM
-  ════════════════════════════════════════ -->
-  <div id="projects-wrapper">
-    <div id="projects-sticky">
-
-      <!-- Ambient background label -->
-      <div class="proj-bg-label">
-        <div class="proj-bg-num" id="projBgNum">01</div>
-        <div class="proj-bg-name" id="projBgName">Disinfecting</div>
-      </div>
-
-      <!-- Section title (fades out once scroll starts) -->
-      <div class="proj-intro" id="projIntro">
-        <span class="section-eyebrow">Selected Work</span>
-        <h2 class="proj-intro-title">My <em>Projects</em></h2>
-        <p>Scroll to fly through</p>
-      </div>
-
-      <!-- 3D STAGE -->
-      <div class="stage-3d" id="stage3d">
-
-        <!-- CARD 0 — DISINFECTING -->
-        <div class="pcard" id="pcard-0">
-          <div class="pcard-browser">
-            <div class="browser-chrome">
-              <span class="bc-dot" style="background:#ff5f57"></span>
-              <span class="bc-dot" style="background:#febc2e"></span>
-              <span class="bc-dot" style="background:#28c840"></span>
-              <div class="bc-url">disinfecting.kidnap.lol</div>
-            </div>
-            <div class="browser-body dis-screen">
-              <!-- DISINFECTING MOCKUP -->
-              <div class="dis-nav">
-                <span class="dis-logo">🎬 DISINFECTING</span>
-                <div class="dis-nav-links">
-                  <span>Movies</span><span>Series</span><span>Search</span>
-                </div>
-              </div>
-              <div class="dis-hero">
-                <div class="dis-badge">FREE STREAMING</div>
-                <div class="dis-hero-title">Watch Movies &<br/>Series for Free</div>
-                <div class="dis-hero-sub">1080p · No ads · Open Source</div>
-                <div class="dis-btn">▶ Start Watching</div>
-              </div>
-              <div class="dis-grid">
-                <div class="dis-poster" style="background:linear-gradient(135deg,#1a1a2e,#16213e);">
-                  <div class="poster-shimmer"></div>
-                </div>
-                <div class="dis-poster" style="background:linear-gradient(135deg,#2d1b69,#11998e);">
-                  <div class="poster-shimmer"></div>
-                </div>
-                <div class="dis-poster" style="background:linear-gradient(135deg,#c0392b,#8e44ad);">
-                  <div class="poster-shimmer"></div>
-                </div>
-                <div class="dis-poster" style="background:linear-gradient(135deg,#0f3460,#533483);">
-                  <div class="poster-shimmer"></div>
-                </div>
-                <div class="dis-poster" style="background:linear-gradient(135deg,#1b4332,#40916c);">
-                  <div class="poster-shimmer"></div>
-                </div>
-                <div class="dis-poster" style="background:linear-gradient(135deg,#4a0e8f,#d63031);">
-                  <div class="poster-shimmer"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="pcard-info">
-            <div class="pcard-top">
-              <span class="pcard-index">01</span>
-              <div class="pcard-tags">
-                <span>TMDB API</span><span>VixSrc</span><span>Open Source</span>
-              </div>
-            </div>
-            <h3 class="pcard-title">Disinfecting</h3>
-            <p class="pcard-desc">Free streaming platform for movies &amp; TV series. 1080p quality, powered by VixSrc API and TMDB. Fully open-source and self-hostable.</p>
-            <a href="https://disinfecting.kidnap.lol" target="_blank" rel="noopener" class="pcard-visit">
-              Visit Site <span class="visit-arrow">→</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- CARD 1 — SNIPEX -->
-        <div class="pcard" id="pcard-1">
-          <div class="pcard-browser">
-            <div class="browser-chrome">
-              <span class="bc-dot" style="background:#ff5f57"></span>
-              <span class="bc-dot" style="background:#febc2e"></span>
-              <span class="bc-dot" style="background:#28c840"></span>
-              <div class="bc-url">snipex.lol</div>
-            </div>
-            <div class="browser-body snipex-screen">
-              <!-- SNIPEX MOCKUP -->
-              <div class="snx-header">
-                <div class="snx-logo">⚡ SNIPEX</div>
-                <div class="snx-nav"><span>Pricing</span><span>API</span><span>Login</span></div>
-              </div>
-              <div class="snx-hero">
-                <div class="snx-title">Discord Username<br/><span class="snx-accent">Availability Checker</span></div>
-                <div class="snx-sub">Check &amp; snipe rare usernames instantly</div>
-                <div class="snx-input-wrap">
-                  <div class="snx-input">Enter Discord username...</div>
-                  <div class="snx-btn">Check</div>
-                </div>
-              </div>
-              <div class="snx-plans">
-                <div class="snx-plan">
-                  <div class="snx-plan-name">Bronze</div>
-                  <div class="snx-plan-price">€7.99<span>/mo</span></div>
-                  <div class="snx-plan-feat">500 checks</div>
-                </div>
-                <div class="snx-plan featured">
-                  <div class="snx-plan-badge">POPULAR</div>
-                  <div class="snx-plan-name">Silver</div>
-                  <div class="snx-plan-price">€19.99<span>/mo</span></div>
-                  <div class="snx-plan-feat">2000 checks</div>
-                </div>
-                <div class="snx-plan">
-                  <div class="snx-plan-name">Gold</div>
-                  <div class="snx-plan-price">€39.99<span>/mo</span></div>
-                  <div class="snx-plan-feat">Unlimited</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="pcard-info">
-            <div class="pcard-top">
-              <span class="pcard-index">02</span>
-              <div class="pcard-tags">
-                <span>Discord API</span><span>SaaS</span><span>Node.js</span>
-              </div>
-            </div>
-            <h3 class="pcard-title">SnipeX</h3>
-            <p class="pcard-desc">Discord username availability checker and sniper. Tiered subscription model from €7.99 to unlimited. Features proxy access, wordlist upload, and full API integration.</p>
-            <a href="https://snipex.lol" target="_blank" rel="noopener" class="pcard-visit">
-              Visit Site <span class="visit-arrow">→</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- CARD 2 — KIDNAP.LOL -->
-        <div class="pcard" id="pcard-2">
-          <div class="pcard-browser">
-            <div class="browser-chrome">
-              <span class="bc-dot" style="background:#ff5f57"></span>
-              <span class="bc-dot" style="background:#febc2e"></span>
-              <span class="bc-dot" style="background:#28c840"></span>
-              <div class="bc-url">kidnap.lol</div>
-            </div>
-            <div class="browser-body kidnap-screen">
-              <!-- KIDNAP.LOL MOCKUP -->
-              <div class="knp-nav">
-                <span class="knp-logo">kidnap.lol</span>
-                <div class="knp-nav-links"><span>Products</span><span>Docs</span><span>Login</span></div>
-              </div>
-              <div class="knp-hero">
-                <div class="knp-badge">🔮 Your Digital Tools Hub</div>
-                <div class="knp-title">Build &amp; Stream<br/><span class="knp-accent">Without Limits</span></div>
-                <div class="knp-sub">Powerful tools for the modern web</div>
-              </div>
-              <div class="knp-cards">
-                <div class="knp-card">
-                  <div class="knp-card-icon">⚡</div>
-                  <div class="knp-card-name">SnipeX</div>
-                  <div class="knp-card-desc">Username checker</div>
-                  <div class="knp-card-link">snipex.lol →</div>
-                </div>
-                <div class="knp-card">
-                  <div class="knp-card-icon">🎬</div>
-                  <div class="knp-card-name">Disinfecting</div>
-                  <div class="knp-card-desc">Free streaming</div>
-                  <div class="knp-card-link">disinfecting.kidnap.lol →</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="pcard-info">
-            <div class="pcard-top">
-              <span class="pcard-index">03</span>
-              <div class="pcard-tags">
-                <span>Hub</span><span>Glassmorphism</span><span>JavaScript</span>
-              </div>
-            </div>
-            <h3 class="pcard-title">kidnap.lol</h3>
-            <p class="pcard-desc">Main hub showcasing all projects. Dark glassmorphic UI with animated particles, gradient overlays, and a clean two-product landing page.</p>
-            <a href="https://kidnap.lol" target="_blank" rel="noopener" class="pcard-visit">
-              Visit Site <span class="visit-arrow">→</span>
-            </a>
-          </div>
-        </div>
-
-      </div><!-- /stage-3d -->
-
-      <!-- Progress dots -->
-      <div class="proj-dots" id="projDots">
-        <button class="pdot active" data-i="0"></button>
-        <button class="pdot" data-i="1"></button>
-        <button class="pdot" data-i="2"></button>
-      </div>
-
-      <!-- Scroll hint within projects -->
-      <div class="proj-scroll-hint" id="projScrollHint">
-        <span>keep scrolling</span>
-      </div>
-
-      <!-- Side navigation -->
-      <nav class="proj-sidenav" id="projSideNav">
-        <div class="psn-track"><div class="psn-fill" id="psnFill"></div></div>
-        <div class="psn-items">
-          <button class="psn-item active" data-i="0">
-            <span class="psn-dot"></span>
-            <span class="psn-label">Disinfecting</span>
-          </button>
-          <button class="psn-item" data-i="1">
-            <span class="psn-dot"></span>
-            <span class="psn-label">SnipeX</span>
-          </button>
-          <button class="psn-item" data-i="2">
-            <span class="psn-dot"></span>
-            <span class="psn-label">kidnap.lol</span>
-          </button>
-        </div>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#projects" class="nav-link">Work</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#contact" class="nav-link">Contact</a>
       </nav>
 
-      <!-- Light leak -->
-      <div class="proj-leak" id="projLeak"></div>
-
-    </div><!-- /projects-sticky -->
-  </div><!-- /projects-wrapper -->
-
-  <!-- ═══════════════════════════════════════
-       ABOUT
-  ════════════════════════════════════════ -->
-  <section id="about">
-    <div class="about-inner">
-      <div class="about-left">
-        <span class="section-eyebrow">About me</span>
-        <h2>I'm <em>Nicoz</em>,<br/>a developer<br/>who cares about<br/><em>details</em>.</h2>
-        <a href="#contact" class="btn-glow small">Work with me</a>
+      <div class="nav-end">
+        <a href="#contact" class="btn btn-ghost nav-cta">Hire me</a>
+        <button id="nav-toggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel">
+          <span></span><span></span>
+        </button>
       </div>
-      <div class="about-right">
-        <p class="about-bio">
-          I build web experiences that are fast, visually striking, and
-          crafted with attention to every pixel. From streaming platforms
-          to SaaS tools, I ship products people actually enjoy using.
+    </div>
+  </header>
+
+  <!-- mobile panel: deliberately a sibling of #nav, not a child. #nav carries a
+       backdrop-filter, which would take the panel inside that backdrop root and
+       leave it painting behind the page instead of over it. -->
+  <div id="nav-panel" class="nav-panel" aria-hidden="true">
+    <nav class="nav-panel-links" aria-label="Mobile">
+      <a href="#projects"><em>01</em>Work</a>
+      <a href="#about"><em>02</em>About</a>
+      <a href="#contact"><em>03</em>Contact</a>
+    </nav>
+    <div class="nav-panel-foot">
+      <a href="https://t.me/creditate" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://github.com/backinbusinesss" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://discord.com/users/1417869399423062197" target="_blank" rel="noopener">Discord</a>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- ═══════════════════════════════
+         HERO
+    ═══════════════════════════════ -->
+    <section id="hero">
+      <canvas id="three-bg" aria-hidden="true"></canvas>
+      <div class="hero-grid-overlay" aria-hidden="true"></div>
+
+      <div class="hero-inner container">
+        <p class="eyebrow hero-eyebrow"><span class="blink-dot"></span> Available for work</p>
+
+        <h1 class="hero-name">Nicoz</h1>
+
+        <p class="hero-role">Web Developer <span class="sep">&amp;</span> Designer</p>
+
+        <p class="hero-desc">
+          I build <em>fast</em>, <em>memorable</em> digital experiences —
+          from the first pixel through to production.
         </p>
-        <div class="skills-grid">
+
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-solid" data-magnetic>
+            <span>View selected work</span>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-11.25a.75.75 0 00-1.5 0v4.59L7.3 9.27a.75.75 0 00-1.1 1.02l3.25 3.5a.75.75 0 001.1 0l3.25-3.5a.75.75 0 10-1.1-1.02l-1.95 2.1V6.75z" clip-rule="evenodd"/></svg>
+          </a>
+          <a href="#contact" class="btn btn-ghost" data-magnetic>Let&rsquo;s talk</a>
+        </div>
+      </div>
+
+      <dl class="hero-meta">
+        <div><dt>Status</dt><dd><span class="blink-dot"></span> Freelance &amp; remote</dd></div>
+        <div><dt>Focus</dt><dd>Frontend · 3D · Motion</dd></div>
+      </dl>
+
+      <div class="hero-scroll-hint" aria-hidden="true">
+        <span>Scroll</span>
+        <i></i>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════
+         MARQUEE
+    ═══════════════════════════════ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Web Development</span><i>✦</i>
+        <span>UI Design</span><i>✦</i>
+        <span>JavaScript</span><i>✦</i>
+        <span>Three.js</span><i>✦</i>
+        <span>Motion</span><i>✦</i>
+        <span>Creative Code</span><i>✦</i>
+        <span>Web Development</span><i>✦</i>
+        <span>UI Design</span><i>✦</i>
+        <span>JavaScript</span><i>✦</i>
+        <span>Three.js</span><i>✦</i>
+        <span>Motion</span><i>✦</i>
+        <span>Creative Code</span><i>✦</i>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════
+         PROJECTS — SCROLL REEL
+    ═══════════════════════════════ -->
+    <section id="projects" aria-label="Selected work">
+      <div id="projects-wrapper">
+        <div id="projects-sticky">
+
+          <div class="reel-counter" aria-hidden="true">
+            <span id="reelIndex">01</span>
+            <span class="reel-counter-sep">/</span>
+            <span id="reelTotal">05</span>
+          </div>
+
+          <div class="proj-intro" id="projIntro">
+            <p class="eyebrow">Selected work</p>
+            <h2 class="h2">Projects I&rsquo;ve <em>shipped</em></h2>
+            <p class="proj-intro-hint">Keep scrolling</p>
+          </div>
+
+          <div class="stage-3d" id="stage3d">
+
+            <!-- ── 01 · SPONKY SQUAD ── -->
+            <article class="pcard" id="pcard-0" data-theme="sponky">
+              <div class="pcard-visual">
+                <div class="mock" data-accent="#22d3ee" data-accent2="#fb923c" data-bg="#06070c">
+                  <div class="mock-bar">
+                    <i></i><i></i><i></i>
+                    <span class="mock-url">sponkysquad.it</span>
+                  </div>
+                  <div class="mock-body">
+                    <div class="mock-nav">
+                      <span class="mock-brand">Sponky Squad</span>
+                      <span class="mock-links"><b>Community</b><b>Eventi</b><b>Partner</b></span>
+                      <span class="mock-pill">Entra</span>
+                    </div>
+                    <div class="mock-hero">
+                      <span class="mock-kicker">Club · Italia</span>
+                      <h4>La piattaforma<br/>per motociclisti</h4>
+                      <p>Tessera digitale, sconti partner e raduni in calendario.</p>
+                      <span class="mock-btn">Iscriviti gratis</span>
+                    </div>
+                    <div class="mock-stats">
+                      <span><b>3.500+</b><i>Iscritti</i></span>
+                      <span><b>48+</b><i>Partner</i></span>
+                      <span><b>16</b><i>Eventi</i></span>
+                    </div>
+                    <div class="mock-events">
+                      <span><i class="mock-ev-date">25<small>OTT</small></i><b>Neon Ride Milano</b><em>Night ride</em></span>
+                      <span><i class="mock-ev-date">08<small>NOV</small></i><b>Cisa Brotherhood Run</b><em>Motogiro</em></span>
+                      <span><i class="mock-ev-date">06<small>DIC</small></i><b>Track Pulse Cremona</b><em>Pista</em></span>
+                    </div>
+                    <div class="mock-partners"><span>Partner ufficiali</span><i></i></div>
+                  </div>
+                </div>
+              </div>
+              <div class="pcard-info">
+                <div class="pcard-top">
+                  <span class="pcard-index">01</span>
+                  <span class="pcard-year">2026 · Design &amp; Full-stack</span>
+                </div>
+                <h3 class="pcard-title">Sponky Squad</h3>
+                <p class="pcard-desc">
+                  Community platform for a motorcycle club: free membership, digital card,
+                  partner discounts, an event calendar and live social tracking.
+                  Built in React Three Fiber with scroll-driven GSAP timelines.
+                </p>
+                <ul class="pcard-tags">
+                  <li>React Three Fiber</li><li>GSAP</li><li>Vite</li><li>GitHub Pages</li>
+                </ul>
+                <a href="https://backinbusinesss.github.io/sponky-squad/" target="_blank" rel="noopener" class="pcard-visit">
+                  Visit site <span class="visit-arrow">→</span>
+                </a>
+              </div>
+            </article>
+
+            <!-- ── 02 · AUTOPSY ── -->
+            <article class="pcard" id="pcard-1" data-theme="autopsy">
+              <div class="pcard-visual">
+                <div class="mock" data-accent="#f43f5e" data-accent2="#fb7185" data-bg="#08050a">
+                  <div class="mock-bar">
+                    <i></i><i></i><i></i>
+                    <span class="mock-url">autopsy.lol</span>
+                  </div>
+                  <div class="mock-body">
+                    <div class="mock-nav">
+                      <span class="mock-brand">AUTOPSY <b>BETA</b></span>
+                      <span class="mock-links"><b>Login</b><b>Register</b></span>
+                      <span class="mock-pill">Join Discord</span>
+                    </div>
+                    <div class="mock-hero">
+                      <span class="mock-kicker">External loader</span>
+                      <h4>Dissect the game</h4>
+                      <p>Hardware-locked builds, re-dropped after every patch.</p>
+                      <span class="mock-btn">Get started</span>
+                    </div>
+                    <div class="mock-cards">
+                      <span><b>Aimbot</b><i>Sens, FoV and hit radius fully tunable.</i></span>
+                      <span><b>Silent Aim</b><i>Server-side registration, clean replay.</i></span>
+                      <span><b>ESP &amp; Radar</b><i>Health, distance and team tags.</i></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pcard-info">
+                <div class="pcard-top">
+                  <span class="pcard-index">02</span>
+                  <span class="pcard-year">2026 · Full-stack</span>
+                </div>
+                <h3 class="pcard-title">Autopsy</h3>
+                <p class="pcard-desc">
+                  Loader platform for Roblox: account system, key-based activation,
+                  hardware locking and a Discord community. Closed beta with
+                  automated build distribution after each game patch.
+                </p>
+                <ul class="pcard-tags">
+                  <li>Node.js</li><li>Discord</li><li>Licensing API</li><li>SQLite</li>
+                </ul>
+                <a href="https://autopsy.lol" target="_blank" rel="noopener" class="pcard-visit">
+                  Visit site <span class="visit-arrow">→</span>
+                </a>
+              </div>
+            </article>
+
+            <!-- ── 03 · GAMBLING ISLAND ── -->
+            <article class="pcard" id="pcard-2" data-theme="mc">
+              <div class="pcard-visual">
+                <div class="mock" data-accent="#fbbf24" data-accent2="#34d399" data-bg="#050a07">
+                  <div class="mock-bar">
+                    <i></i><i></i><i></i>
+                    <span class="mock-url">mc.kidnap.lol</span>
+                  </div>
+                  <div class="mock-body">
+                    <div class="mock-nav">
+                      <span class="mock-brand">Gambling Island</span>
+                      <span class="mock-links"><b>Store</b><b>Rules</b><b>Vote</b></span>
+                      <span class="mock-pill">Play</span>
+                    </div>
+                    <div class="mock-hero">
+                      <span class="mock-kicker">Minecraft server</span>
+                      <h4>Gambling<br/>Island</h4>
+                      <p>Casino games, player economy and weekly events on a custom island.</p>
+                      <span class="mock-search"><i>mc.kidnap.lol</i><b>Copy IP</b></span>
+                    </div>
+                    <div class="mock-cards">
+                      <span><b>Casino floor</b><i>Table and machine games, all custom-built.</i></span>
+                      <span><b>Player economy</b><i>Earn, trade and bank in-game currency.</i></span>
+                      <span><b>Weekly events</b><i>Tournaments and prize drops on schedule.</i></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pcard-info">
+                <div class="pcard-top">
+                  <span class="pcard-index">03</span>
+                  <span class="pcard-year">2025 · Design &amp; Backend</span>
+                </div>
+                <h3 class="pcard-title">Gambling Island</h3>
+                <p class="pcard-desc">
+                  Marketing site for Gambling Island, a Minecraft server built around
+                  casino games. Server status, rules, store and a one-click IP copy —
+                  the page players land on before they join.
+                </p>
+                <ul class="pcard-tags">
+                  <li>Node.js</li><li>Server status</li><li>Landing page</li>
+                </ul>
+                <a href="https://mc.kidnap.lol" target="_blank" rel="noopener" class="pcard-visit" aria-describedby="mc-note">
+                  Visit site <span class="visit-arrow">→</span>
+                </a>
+                <p id="mc-note" class="pcard-note">Domain is live; the origin was returning 502 at the time of writing.</p>
+              </div>
+            </article>
+
+            <!-- ── 04 · DISINFECTING ── -->
+            <article class="pcard" id="pcard-3" data-theme="disinfecting">
+              <div class="pcard-visual">
+                <div class="mock" data-accent="#818cf8" data-accent2="#22d3ee" data-bg="#080812">
+                  <div class="mock-bar">
+                    <i></i><i></i><i></i>
+                    <span class="mock-url">disinfecting.kidnap.lol</span>
+                  </div>
+                  <div class="mock-body">
+                    <div class="mock-nav">
+                      <span class="mock-brand">Disinfecting</span>
+                      <span class="mock-links"><b>Movies</b><b>Series</b><b>Search</b></span>
+                      <span class="mock-pill">Free</span>
+                    </div>
+                    <div class="mock-hero">
+                      <span class="mock-kicker">Open source</span>
+                      <h4>Watch movies &amp;<br/>series for free</h4>
+                      <p>1080p · No ads · Self-hostable</p>
+                      <span class="mock-btn">▶ Start watching</span>
+                    </div>
+                    <div class="mock-thumbs mock-thumbs-6">
+                      <span></span><span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pcard-info">
+                <div class="pcard-top">
+                  <span class="pcard-index">04</span>
+                  <span class="pcard-year">2025 · Design &amp; Full-stack</span>
+                </div>
+                <h3 class="pcard-title">Disinfecting</h3>
+                <p class="pcard-desc">
+                  Free streaming platform for movies and TV series. 1080p playback
+                  powered by the VixSrc API with TMDB metadata. Fully open source and
+                  self-hostable in a single container.
+                </p>
+                <ul class="pcard-tags">
+                  <li>TMDB API</li><li>VixSrc</li><li>Docker</li><li>Open source</li>
+                </ul>
+                <a href="https://disinfecting.kidnap.lol" target="_blank" rel="noopener" class="pcard-visit">
+                  Visit site <span class="visit-arrow">→</span>
+                </a>
+              </div>
+            </article>
+
+            <!-- ── 05 · SNIPEX ── -->
+            <article class="pcard" id="pcard-4" data-theme="snipex">
+              <div class="pcard-visual">
+                <div class="mock" data-accent="#60a5fa" data-accent2="#38bdf8" data-bg="#05060f">
+                  <div class="mock-bar">
+                    <i></i><i></i><i></i>
+                    <span class="mock-url">snipex.lol</span>
+                  </div>
+                  <div class="mock-body">
+                    <div class="mock-nav">
+                      <span class="mock-brand">SnipeX</span>
+                      <span class="mock-links"><b>Pricing</b><b>API</b><b>Login</b></span>
+                      <span class="mock-pill">Sign in</span>
+                    </div>
+                    <div class="mock-hero">
+                      <span class="mock-kicker">Discord tooling</span>
+                      <h4>Username<br/>availability checker</h4>
+                      <p>Check &amp; snipe rare usernames instantly.</p>
+                      <span class="mock-search"><i>Enter Discord username…</i><b>Check</b></span>
+                    </div>
+                    <div class="mock-cards">
+                      <span><b>Bronze</b><i>€7.99/mo · 500 checks</i></span>
+                      <span class="is-featured"><b>Silver<em>Popular</em></b><i>€19.99/mo · 2.000 checks</i></span>
+                      <span><b>Gold</b><i>€39.99/mo · Unlimited</i></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pcard-info">
+                <div class="pcard-top">
+                  <span class="pcard-index">05</span>
+                  <span class="pcard-year">2024 · Full-stack</span>
+                </div>
+                <h3 class="pcard-title">SnipeX</h3>
+                <p class="pcard-desc">
+                  Discord username availability checker and sniper with a tiered
+                  subscription model from €7.99 to unlimited. Proxy access,
+                  wordlist uploads and a documented REST API.
+                </p>
+                <ul class="pcard-tags">
+                  <li>Discord API</li><li>SaaS</li><li>Node.js</li><li>Stripe</li>
+                </ul>
+                <a href="https://snipex.lol" target="_blank" rel="noopener" class="pcard-visit">
+                  Visit site <span class="visit-arrow">→</span>
+                </a>
+              </div>
+            </article>
+
+          </div><!-- /stage -->
+
+          <!-- side navigation -->
+          <nav class="proj-sidenav" id="projSideNav" aria-label="Project navigation">
+            <div class="psn-track"><div class="psn-fill" id="psnFill"></div></div>
+            <div class="psn-items">
+              <button class="psn-item" data-i="0"><span class="psn-dot"></span><span class="psn-label">Sponky Squad</span></button>
+              <button class="psn-item" data-i="1"><span class="psn-dot"></span><span class="psn-label">Autopsy</span></button>
+              <button class="psn-item" data-i="2"><span class="psn-dot"></span><span class="psn-label">Gambling Island</span></button>
+              <button class="psn-item" data-i="3"><span class="psn-dot"></span><span class="psn-label">Disinfecting</span></button>
+              <button class="psn-item" data-i="4"><span class="psn-dot"></span><span class="psn-label">SnipeX</span></button>
+            </div>
+          </nav>
+
+          <div class="proj-dots" id="projDots">
+            <button class="pdot" data-i="0" aria-label="Project 1"></button>
+            <button class="pdot" data-i="1" aria-label="Project 2"></button>
+            <button class="pdot" data-i="2" aria-label="Project 3"></button>
+            <button class="pdot" data-i="3" aria-label="Project 4"></button>
+            <button class="pdot" data-i="4" aria-label="Project 5"></button>
+          </div>
+
+        </div><!-- /sticky -->
+      </div><!-- /wrapper -->
+    </section>
+
+    <!-- ═══════════════════════════════
+         ABOUT
+    ═══════════════════════════════ -->
+    <section id="about">
+      <div class="container about-inner">
+
+        <div class="about-head" data-reveal>
+          <p class="eyebrow">About</p>
+          <h2 class="h2">I&rsquo;m Nicoz, a developer who cares about <em>details</em>.</h2>
+        </div>
+
+        <div class="about-body" data-reveal>
+          <p class="about-lead">
+            I build web experiences that are fast, visually striking and crafted
+            with attention to every pixel. From streaming platforms to SaaS tools,
+            I ship products people actually enjoy using.
+          </p>
+          <p class="about-sub">
+            Most of my work is design and engineering at the same time: I set the
+            visual system, then write the code that runs it — no handoff, no
+            approximation in the middle.
+          </p>
+        </div>
+
+        <div class="services" data-reveal>
+          <article class="service">
+            <span class="service-n">01</span>
+            <h3>Product &amp; UI design</h3>
+            <p>Design systems, typography, layout and interaction detail — delivered as a working spec, not a static file.</p>
+          </article>
+          <article class="service">
+            <span class="service-n">02</span>
+            <h3>Frontend engineering</h3>
+            <p>Hand-written HTML, CSS and JavaScript. Fast, accessible and maintainable, with no framework unless it earns its place.</p>
+          </article>
+          <article class="service">
+            <span class="service-n">03</span>
+            <h3>3D &amp; motion</h3>
+            <p>Three.js scenes, WebGL shaders and scroll-driven GSAP timelines that support the story instead of slowing the page down.</p>
+          </article>
+        </div>
+
+        <div class="skills-grid" data-reveal>
           <div class="skill-group">
             <h4>Frontend</h4>
-            <div class="skill-chips">
-              <span>HTML/CSS</span><span>JavaScript</span><span>Three.js</span><span>GSAP</span>
-            </div>
+            <div class="skill-chips"><span>HTML/CSS</span><span>JavaScript</span><span>TypeScript</span><span>Three.js</span><span>GSAP</span></div>
           </div>
           <div class="skill-group">
             <h4>Backend</h4>
-            <div class="skill-chips">
-              <span>Node.js</span><span>APIs</span><span>Discord.js</span>
-            </div>
+            <div class="skill-chips"><span>Node.js</span><span>REST APIs</span><span>Discord.js</span><span>SQLite</span></div>
           </div>
           <div class="skill-group">
             <h4>Tools</h4>
-            <div class="skill-chips">
-              <span>Git</span><span>Figma</span><span>VS Code</span>
-            </div>
+            <div class="skill-chips"><span>Git</span><span>Figma</span><span>Docker</span><span>GitHub Actions</span></div>
           </div>
         </div>
-        <div class="about-stats">
-          <div class="astat">
-            <span class="astat-n" data-count="3" data-suffix="+">0+</span>
-            <span class="astat-l">Projects live</span>
-          </div>
-          <div class="astat">
-            <span class="astat-n" data-count="100" data-suffix="%">0%</span>
-            <span class="astat-l">Custom code</span>
-          </div>
-          <div class="astat">
-            <span class="astat-n">∞</span>
-            <span class="astat-l">Passion</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ═══════════════════════════════════════
-       CONTACT
-  ════════════════════════════════════════ -->
-  <section id="contact">
-    <div class="contact-inner">
-      <span class="section-eyebrow">Get in touch</span>
-      <h2 class="contact-title">Let's build<br/>something <em>great</em>.</h2>
-      <p class="contact-sub">Have a project in mind? Let's talk.</p>
-      <div class="contact-links">
-        <a href="https://t.me/kidnapdev" target="_blank" rel="noopener" class="contact-link">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg>
-          Telegram
-        </a>
-        <a href="https://kidnap.lol" target="_blank" rel="noopener" class="contact-link">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-          kidnap.lol
-        </a>
-        <a href="https://github.com/backinbusinesss" target="_blank" rel="noopener" class="contact-link">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-          GitHub
-        </a>
-      </div>
-    </div>
-    <div class="contact-bg-text">NICOZ</div>
-  </section>
+        <dl class="about-stats" data-reveal>
+          <div><dt class="astat-n" data-count="5" data-suffix="">0</dt><dd>Projects live</dd></div>
+          <div><dt class="astat-n" data-count="100" data-suffix="%">0%</dt><dd>Custom code</dd></div>
+          <div><dt class="astat-n">∞</dt><dd>Passion</dd></div>
+        </dl>
 
-  <!-- FOOTER -->
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════
+         CONTACT
+    ═══════════════════════════════ -->
+    <section id="contact">
+      <div class="container contact-inner">
+        <p class="eyebrow">Get in touch</p>
+        <h2 class="h2 contact-title">Let&rsquo;s build<br/>something <em>great</em>.</h2>
+        <p class="contact-sub">Have a project in mind? Pick whichever channel suits you.</p>
+
+        <ul class="social-list">
+          <li>
+            <a class="social" href="https://t.me/creditate" target="_blank" rel="noopener">
+              <span class="social-ic" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.941z"/></svg>
+              </span>
+              <span class="social-text"><b>Telegram</b><i>@creditate</i></span>
+              <span class="social-go" aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li>
+            <a class="social" href="https://github.com/backinbusinesss" target="_blank" rel="noopener">
+              <span class="social-ic" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              </span>
+              <span class="social-text"><b>GitHub</b><i>@backinbusinesss</i></span>
+              <span class="social-go" aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li>
+            <a class="social" href="https://discord.com/users/1417869399423062197" target="_blank" rel="noopener">
+              <span class="social-ic" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg>
+              </span>
+              <span class="social-text"><b>Discord</b><i>@ragefuck</i></span>
+              <span class="social-go" aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li>
+            <a class="social" href="https://www.whatsapp.com/" target="_blank" rel="noopener">
+              <span class="social-ic" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </span>
+              <span class="social-text"><b>WhatsApp Business</b><i>@bonifici</i></span>
+              <span class="social-go" aria-hidden="true">↗</span>
+            </a>
+          </li>
+        </ul>
+
+        <p class="contact-alt">
+          Prefer email? <a href="mailto:hello@nicoz.dev">hello@nicoz.dev</a>
+        </p>
+      </div>
+
+      <div class="contact-bg-text" aria-hidden="true">NICOZ</div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════
+       FOOTER
+  ═══════════════════════════════ -->
   <footer id="footer">
-    <span>© 2025 Nicoz — Built from scratch with ♥</span>
-    <span>kidnap.lol</span>
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+        <a href="#hero" class="nav-logo" aria-label="Nicoz — back to top">
+          <span class="nav-logo-mark">NZ</span>
+          <span class="nav-logo-word">Nicoz</span>
+        </a>
+        <p class="footer-tag">Independent web developer &amp; designer. Design and code, same pair of hands.</p>
+      </div>
+
+      <nav class="footer-col" aria-label="Footer sitemap">
+        <h4>Sitemap</h4>
+        <a href="#projects">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Footer social">
+        <h4>Social</h4>
+        <a href="https://t.me/creditate" target="_blank" rel="noopener">Telegram <span>@creditate</span></a>
+        <a href="https://github.com/backinbusinesss" target="_blank" rel="noopener">GitHub <span>@backinbusinesss</span></a>
+        <a href="https://discord.com/users/1417869399423062197" target="_blank" rel="noopener">Discord <span>@ragefuck</span></a>
+        <a href="https://www.whatsapp.com/" target="_blank" rel="noopener">WhatsApp <span>@bonifici</span></a>
+      </nav>
+
+      <div class="footer-col" aria-label="Footer legal">
+        <h4>Legale</h4>
+        <a href="termini.html">Termini e Condizioni</a>
+        <a href="cookie.html">Cookie Policy</a>
+        <a href="cookie.html#preferenze" data-open-consent>Preferenze di Privacy</a>
+      </div>
+
+    </div>
+
+    <div class="container footer-legal">
+      <p class="footer-vat">
+        Titolare: Nicoz &nbsp;·&nbsp; P.IVA <span class="selectable">IT00000000000</span>
+        &nbsp;·&nbsp; Codice Fiscale <span class="selectable">XXXXXXXXXXXXXXXX</span>
+      </p>
+      <p class="footer-copy">© 2026 Nicoz — Built from scratch with <span aria-hidden="true">♥</span><span class="sr-only">love</span></p>
+      <p class="footer-note">
+        Tax identifiers are placeholders pending registration data.
+      </p>
+    </div>
   </footer>
+
+  <!-- ══ CONSENT BANNER ══ -->
+  <div id="consent" class="consent" role="dialog" aria-modal="false" aria-labelledby="consent-title" aria-hidden="true">
+    <div class="consent-inner">
+      <div class="consent-copy">
+        <h3 id="consent-title">Cookie &amp; privacy</h3>
+        <p>
+          This site only stores your consent choice on this device.
+          No analytics or advertising cookies are set.
+          Read the <a href="cookie.html">Cookie Policy</a>.
+        </p>
+      </div>
+      <div class="consent-actions">
+        <button class="btn btn-ghost" data-consent="essential">Essential only</button>
+        <button class="btn btn-ghost" data-open-consent>Preferences</button>
+        <button class="btn btn-solid" data-consent="all">Accept all</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ CONSENT PREFERENCES MODAL ══ -->
+  <div id="consent-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-panel">
+      <header class="modal-head">
+        <h3 id="modal-title">Privacy preferences</h3>
+        <button class="modal-close" data-close-modal aria-label="Close preferences">✕</button>
+      </header>
+
+      <div class="modal-body">
+        <label class="toggle is-locked">
+          <span>
+            <b>Strictly necessary</b>
+            <i>Required to remember this choice. Always active.</i>
+          </span>
+          <input type="checkbox" checked disabled />
+          <em class="switch" aria-hidden="true"></em>
+        </label>
+
+        <label class="toggle">
+          <span>
+            <b>Experience</b>
+            <i>Remembers interface preferences such as reduced motion.</i>
+          </span>
+          <input type="checkbox" data-consent-key="experience" />
+          <em class="switch" aria-hidden="true"></em>
+        </label>
+
+        <label class="toggle">
+          <span>
+            <b>Analytics</b>
+            <i>Reserved. No analytics tool is installed on this site today.</i>
+          </span>
+          <input type="checkbox" data-consent-key="analytics" />
+          <em class="switch" aria-hidden="true"></em>
+        </label>
+
+        <p class="modal-foot">
+          Full detail in the <a href="cookie.html">Cookie Policy</a>.
+          You can change this at any time from the footer.
+        </p>
+      </div>
+
+      <footer class="modal-actions">
+        <button class="btn btn-ghost" data-consent="essential">Essential only</button>
+        <button class="btn btn-solid" data-consent="save">Save preferences</button>
+      </footer>
+    </div>
+  </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
