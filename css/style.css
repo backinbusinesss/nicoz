@@ -1102,17 +1102,30 @@ body.menu-open .nav-panel { opacity: 1; visibility: visible; }
   display: flex; flex-wrap: wrap; align-items: center;
   gap: .65rem 1.5rem;
 }
-.footer-vat, .footer-copy, .footer-note {
+.footer-vat {
   font-size: .75rem; color: var(--dimmed);
-  line-height: 1.7;
+  line-height: 1.9;
+  font-family: var(--font-m); letter-spacing: .02em;
 }
-.footer-vat { font-family: var(--font-m); letter-spacing: .02em; }
-.footer-copy { margin-left: auto; }
 .footer-vat .selectable {
   color: var(--muted);
   border-bottom: 1px dotted var(--border-str);
 }
-.footer-note { width: 100%; font-size: .6875rem; opacity: .75; }
+/* i link legali vivono dentro la riga del footer: stesso corpo del testo,
+   colore appena piu' chiaro, sottolineatura sottile che al passaggio del
+   mouse si accende sul ciano. */
+.footer-vat a {
+  color: var(--muted);
+  text-decoration: underline;
+  text-decoration-color: var(--border-str);
+  text-underline-offset: 3px;
+  transition: color .2s ease, text-decoration-color .2s ease;
+}
+.footer-vat a:hover,
+.footer-vat a:focus-visible {
+  color: var(--violet-2);
+  text-decoration-color: var(--violet-2);
+}
 
 /* ── 17. CONSENT BANNER ────────────────────────────────── */
 .consent {
@@ -1436,7 +1449,6 @@ body::after {
   .social-list { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-brand { grid-column: 1 / -1; }
-  .footer-copy { margin-left: 0; }
 
   .consent-inner { gap: 1rem; }
   .consent-actions { width: 100%; }
