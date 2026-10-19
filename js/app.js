@@ -224,9 +224,27 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ═════════════════════════════════════════════════════════
      PROJECT REEL — only on the home page
      ═════════════════════════════════════════════════════════ */
-  const wrapper = $('#projects-wrapper');
+  /* ── PROJECT REEL — deferred until user interaction ───────────────────── */
+  // Flag + handler: avvia i widget pesanti dopo la prima interazione utente (scroll/click/touch)
+  let startedReel = false;
+  const onFirstReelInteraction = () => {
+    if (startedReel) return;
+    startedReel = true;
+    window.removeEventListener('mousedown', onFirstReelInteraction);
+    window.removeEventListener('touchstart', onFirstReelInteraction);
+    window.removeEventListener('scroll', onFirstReelInteraction);
+    window.removeEventListener('keydown', onFirstReelInteraction);
+    maybeInitProjectReel();
+  };
+  window.addEventListener('mousedown', onFirstReelInteraction);
+  window.addEventListener('touchstart', onFirstReelInteraction);
+  window.addEventListener('scroll', onFirstReelInteraction);
+  window.addEventListener('keydown', onFirstReelInteraction);
 
-  if (wrapper && hasGSAP && typeof ScrollTrigger !== 'undefined') {
+  const maybeInitProjectReel = () => {
+    const wrapper = $('#projects-wrapper');
+    if (!wrapper) return;
+    if (typeof ScrollTrigger === 'undefined') return;
     gsap.registerPlugin(ScrollTrigger);
 
     const sticky   = $('#projects-sticky');
@@ -349,7 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
       wrapper.style.height = (scrollLen() + window.innerHeight) + 'px';
       ScrollTrigger.refresh();
     });
-  }
+  };
 
   /* ═════════════════════════════════════════════════════════
      COOKIE CONSENT — banner, preferences modal, storage

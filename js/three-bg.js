@@ -120,6 +120,23 @@
   }
 
   const clock = new THREE.Clock();
+  let started = false;
+
+  // Avvia il loop di animazione solo dopo la prima interazione utente
+  const startOnInteraction = () => {
+    if (started) return;
+    started = true;
+    window.removeEventListener('mousedown', startOnInteraction);
+    window.removeEventListener('touchstart', startOnInteraction);
+    window.removeEventListener('scroll', startOnInteraction);
+    window.removeEventListener('keydown', startOnInteraction);
+    requestAnimationFrame(loop);
+  };
+
+  window.addEventListener('mousedown', startOnInteraction);
+  window.addEventListener('touchstart', startOnInteraction);
+  window.addEventListener('scroll', startOnInteraction);
+  window.addEventListener('keydown', startOnInteraction);
 
   function frame() {
     if (!visible) return;
