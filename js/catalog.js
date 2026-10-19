@@ -18,7 +18,8 @@
   const pick     = (en, it) => (lang() === 'it' ? it : en);
 
   const DEFAULT_CONTACT = {
-    email: 'nicoz@secria.me',
+    email: 'info@nicozdev.online',
+    pec: 'help@pec.nicozdev.shop',
     whatsapp: '18734741519',
     whatsappDisplay: '+1 (873) 474-1519'
   };

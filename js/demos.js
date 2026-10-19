@@ -35,7 +35,7 @@
   };
 
   /* ── data ─────────────────────────────────────────────── */
-  let contact  = { email: 'nicoz@secria.me', whatsapp: '18734741519' };
+  let contact  = { email: 'info@nicozdev.online', pec: 'help@pec.nicozdev.shop', whatsapp: '18734741519' };
   let products = [];
   let ready    = false;
 

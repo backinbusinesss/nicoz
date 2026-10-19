@@ -79,6 +79,9 @@
           Three quick steps. At the end you get a reference number and a
           pre-filled WhatsApp message — nothing is sent without your consent.
         </p>
+        <p class="wiz-sent" id="wiz-sent" hidden>
+          <span>✓</span> Request sent to info@nicozdev.online — I&rsquo;ll get back to you soon.
+        </p>
       </div>
 
       <!-- progress -->
@@ -260,24 +263,38 @@
           <h2>Your request is ready.</h2>
           <span class="selectable ref" id="ws-ref">#IDEA-0000</span>
           <p>
-            One more tap and it lands on WhatsApp, already filled with your
-            products, details and contact info. You can edit the message
-            before sending.
+            One tap sends the request to info@nicozdev.online with your
+            products, details and contact info already filled in — you can
+            also open it on WhatsApp and edit the message before sending.
           </p>
           <div class="ws-actions">
             <a class="btn btn-solid" id="ws-wa" target="_blank" rel="noopener" href="#">
               <span>Open WhatsApp</span>
               <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.19L10.47 5.53a.75.75 0 111.06-1.06l5 5a.75.75 0 010 1.06l-5 5a.75.75 0 11-1.06-1.06l3.47-3.47H3.75A.75.75 0 013 10z" clip-rule="evenodd"/></svg>
             </a>
-            <a class="btn btn-ghost" id="ws-mail" href="#">
-              <span>Email instead</span>
-              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.19L10.47 5.53a.75.75 0 111.06-1.06l5 5a.75.75 0 010 1.06l-5 5a.75.75 0 11-1.06-1.06l3.47-3.47H3.75A.75.75 0 013 10z" clip-rule="evenodd"/></svg>
-            </a>
+            <!-- real POST: the filled form is delivered to info@nicozdev.online -->
+            <form class="ws-mail-form" id="ws-mail-form"
+                  action="https://formsubmit.co/info@nicozdev.online"
+                  method="POST">
+              <input type="hidden" name="_subject" id="ws-mail-subject" value="New project request" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_next" value="https://nicozdev.online/build?sent=1" />
+              <input type="hidden" name="name" id="ws-mail-name" value="" />
+              <input type="hidden" name="email" id="ws-mail-email" value="" />
+              <input type="hidden" name="message" id="ws-mail-body" value="" />
+              <button class="btn btn-ghost" id="ws-mail" type="submit">
+                <span>Send to info@nicozdev.online</span>
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.19L10.47 5.53a.75.75 0 111.06-1.06l5 5a.75.75 0 010 1.06l-5 5a.75.75 0 11-1.06-1.06l3.47-3.47H3.75A.75.75 0 013 10z" clip-rule="evenodd"/></svg>
+              </button>
+            </form>
           </div>
           <p class="ws-note">
             Tip: keep the reference number — quote it in any follow-up.
-            You can also reach Nicoz directly at
-            <a href="mailto:nicoz@secria.me" style="color: var(--mint);">nicoz@secria.me</a>.
+            The form above is also sent to
+            <a href="mailto:info@nicozdev.online" style="color: var(--mint);">info@nicozdev.online</a>.
+            For contracts and formal documents use the PEC
+            <a href="mailto:help@pec.nicozdev.shop" style="color: var(--mint);">help@pec.nicozdev.shop</a>.
           </p>
         </div>
       </div>
@@ -320,6 +337,7 @@
         <a href="termini">Termini e Condizioni</a>
         <a href="cookie">Cookie Policy</a>
         <a href="cookie#preferenze" data-open-consent>Preferenze di Privacy</a>
+        <a href="mailto:help@pec.nicozdev.shop">PEC&nbsp;&mdash;&nbsp;help@pec.nicozdev.shop</a>
       </div>
 
     </div>
@@ -332,7 +350,7 @@
         &nbsp;-&nbsp;
         <a href="cookie">Cookie Policy</a>
         &nbsp;-&nbsp;
-        <a href="mailto:nicoz@secria.me">nicoz@secria.me</a>
+        <a href="mailto:info@nicozdev.online">info@nicozdev.online</a>
         &nbsp;-&nbsp;
         <a href="#" data-open-consent>Preferenze di privacy</a>
       </p>

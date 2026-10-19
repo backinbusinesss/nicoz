@@ -69,6 +69,7 @@
     '#footer [aria-label="Footer legal"] a:nth-of-type(1)': S(['Termini e Condizioni', 'Termini e Condizioni']),
     '#footer [aria-label="Footer legal"] a:nth-of-type(2)': S(['Cookie Policy', 'Cookie Policy']),
     '#footer [aria-label="Footer legal"] a:nth-of-type(3)': S(['Preferenze di Privacy', 'Preferenze di Privacy']),
+    '#footer [aria-label="Footer legal"] a:nth-of-type(4)': S(['PEC &mdash; help@pec.nicozdev.shop', 'PEC &mdash; help@pec.nicozdev.shop']),
     '#footer .footer-legal a[data-open-consent]': S(['Preferenze di privacy', 'Preferenze di privacy'])
 
     ,/* consent banner */
@@ -219,8 +220,13 @@
       '#contact .contact-sub': S(['Have a project in mind? Pick whichever channel suits you.',
                                   'Hai un progetto in mente? Scegli il canale che preferisci.']),
       '#contact .contact-alt':
-        S(['Prefer email? <a href="mailto:nicoz@secria.me">nicoz@secria.me</a>',
-           'Preferisci la mail? <a href="mailto:nicoz@secria.me">nicoz@secria.me</a>'])
+        S(['Prefer email? <a href="mailto:info@nicozdev.online">info@nicozdev.online</a>',
+           'Preferisci la mail? <a href="mailto:info@nicozdev.online">info@nicozdev.online</a>']),
+      '#contact #contact-pec':
+        S(['Official communications (contracts, legal documents)? ' +
+           '<a href="mailto:help@pec.nicozdev.shop">help@pec.nicozdev.shop</a>',
+           'Comunicazioni ufficiali (contratti, documenti formali)? ' +
+           '<a href="mailto:help@pec.nicozdev.shop">help@pec.nicozdev.shop</a>'])
     },
 
     catalogo: {
@@ -351,20 +357,28 @@
 
       '#step-success h2': S(['Your request is ready.', 'La tua richiesta è pronta.']),
       '#step-success .wiz-success > p': S([
-        'One more tap and it lands on WhatsApp, already filled with your ' +
-        'products, details and contact info. You can edit the message ' +
-        'before sending.',
-        'Un altro tap e arriva su WhatsApp, già riempito con prodotti, dettagli ' +
-        'e contatti. Puoi modificare il messaggio prima di inviarlo.']),
+        'One tap sends the request to info@nicozdev.online with your ' +
+        'products, details and contact info already filled in — you can ' +
+        'also open it on WhatsApp and edit the message before sending.',
+        'Un tap invia la richiesta a info@nicozdev.online con prodotti, ' +
+        'dettagli e contatti già compilati — puoi anche aprirla su WhatsApp ' +
+        'e modificare il messaggio prima di inviarlo.']),
       '#ws-wa span': S(['Open WhatsApp', 'Apri WhatsApp']),
-      '#ws-mail span': S(['Email instead', 'Mandala via mail']),
+      '#ws-mail span': S(['Send to info@nicozdev.online', 'Invia a info@nicozdev.online']),
+      '#wiz-sent': S([
+        '<span>✓</span> Request sent to info@nicozdev.online — I&rsquo;ll get back to you soon.',
+        '<span>✓</span> Richiesta inviata a info@nicozdev.online — ti rispondo al pi&ugrave; presto.']),
       '.ws-note': S([
         'Tip: keep the reference number — quote it in any follow-up. ' +
-        'You can also reach Nicoz directly at ' +
-        '<a href="mailto:nicoz@secria.me" style="color: var(--mint);">nicoz@secria.me</a>.',
+        'The form above is also sent to ' +
+        '<a href="mailto:info@nicozdev.online" style="color: var(--mint);">info@nicozdev.online</a>. ' +
+        'For contracts and formal documents use the PEC ' +
+        '<a href="mailto:help@pec.nicozdev.shop" style="color: var(--mint);">help@pec.nicozdev.shop</a>.',
         'Consiglio: conserva il numero di riferimento — citalo in ogni follow-up. ' +
-        'Puoi anche raggiungere Nicoz direttamente su ' +
-        '<a href="mailto:nicoz@secria.me" style="color: var(--mint);">nicoz@secria.me</a>.'])
+        'Il modulo sopra viene inviato anche a ' +
+        '<a href="mailto:info@nicozdev.online" style="color: var(--mint);">info@nicozdev.online</a>. ' +
+        'Per contratti e documenti formali usa la PEC ' +
+        '<a href="mailto:help@pec.nicozdev.shop" style="color: var(--mint);">help@pec.nicozdev.shop</a>.'])
     },
 
     demo: {

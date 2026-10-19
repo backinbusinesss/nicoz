@@ -18,7 +18,8 @@
   const API_BASE = ''; // e.g. "https://nicoz-api.vercel.app" — future backend
 
   const DEFAULT_CONTACT = {
-    email: 'nicoz@secria.me',
+    email: 'info@nicozdev.online',
+    pec: 'help@pec.nicozdev.shop',
     whatsapp: '18734741519',
     whatsappDisplay: '+1 (873) 474-1519'
   };
@@ -457,16 +458,20 @@
     const msg = buildMessage(ref);
     const waHref =
       'https://wa.me/' + contact.whatsapp + '?text=' + encodeURIComponent(msg);
-    const mailHref =
-      'mailto:' + contact.email + '?subject=' +
-      encodeURIComponent(pick(T.mailSub.en, T.mailSub.it) + ' ' + ref) +
-      '&body=' + encodeURIComponent(msg);
 
     const panel = $('#step-success');
     if (!panel) return;
     $('#ws-ref').textContent = ref;
     $('#ws-wa').href = waHref;
-    $('#ws-mail').href = mailHref;
+
+    /* the filled form is delivered to info@nicozdev.online */
+    const mailSubject = pick(T.mailSub.en, T.mailSub.it) + ' ' + ref;
+    const setVal = (sel, val) => { const el = $(sel); if (el) el.value = val; };
+    setVal('#ws-mail-subject', mailSubject);
+    setVal('#ws-mail-name', state.name || '');
+    setVal('#ws-mail-email', state.email || '');
+    setVal('#ws-mail-body', msg);
+
     panels.forEach(p => p.classList.toggle('active', p === panel));
     progress.forEach(p => { p.classList.add('done'); p.classList.remove('active'); });
     try { localStorage.removeItem(DRAFT_KEY); } catch { /* */ }
@@ -507,6 +512,17 @@
     }
   };
   window.addEventListener('nicoz:lang', relocalize);
+
+  /* ── "request sent" confirmation (?sent=1) ────────────── */
+  const sentBanner = $('#wiz-sent');
+  if (sentBanner && new URLSearchParams(location.search).get('sent') === '1') {
+    sentBanner.hidden = false;
+    try {
+      const u = new URL(location.href);
+      u.searchParams.delete('sent');
+      history.replaceState({}, '', u.pathname + u.search + u.hash);
+    } catch { /* ignore */ }
+  }
 
   /* ── first paint ──────────────────────────────────────── */
   renderChips();

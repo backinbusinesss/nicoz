@@ -43,7 +43,8 @@ Stored in `products.json` under `contact`:
 
 ```json
 "contact": {
-  "email": "nicoz@secria.me",
+  "email": "info@nicozdev.online",
+  "pec": "help@pec.nicozdev.shop",
   "whatsapp": "18734741519",
   "whatsappDisplay": "+1 (873) 474-1519"
 }
@@ -51,6 +52,12 @@ Stored in `products.json` under `contact`:
 
 `whatsapp` must be digits only (country code included, no `+`, no spaces) —
 it is what powers all `wa.me` links. The display version is used in text.
+
+`email` is the public address (quotes, info, support) and the destination of
+the wizard form on `build` — the filled form is POSTed to
+`https://formsubmit.co/info@nicozdev.online`, so it lands in the inbox
+automatically. `pec` is the certified address (contracts, formal documents)
+and is shown in the footer, in the contact section and in the legal pages.
 
 ## WhatsApp Business catalog export
 
@@ -95,7 +102,7 @@ API is unreachable.
   language live; the choice is saved in localStorage (
 icoz-lang).
 - js/i18n.js holds the IT translations of all static UI texts, keyed by CSS
-  selector, as [EN, IT] pairs. It also injects the switch pill � no HTML
+  selector, as [EN, IT] pairs. It also injects the switch pill � no HTML
   changes needed when adding pages: just load the script and it works.
 - Dynamic content follows window.NicozI18N.lang:
   - products.json / undles.json: each product/bundle can have an optional
