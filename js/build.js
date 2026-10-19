@@ -6,6 +6,9 @@
    Draft autosaves to localStorage between steps/reloads.
    API_BASE reserved for a future backend: when set, the
    request is POSTed there and the server-side ref is used.
+   Localized via window.NicozI18N (EN default, IT switch):
+   option labels, review, validation + WhatsApp message follow
+   the active language and re-render on the `nicoz:lang` event.
    ═══════════════════════════════════════════════════════════ */
 (async () => {
 
@@ -24,13 +27,66 @@
   const DESC_MAX  = 500;
   const FILE_MAX  = 5 * 1024 * 1024; // 5 MB
 
-  const BUDGETS  = ['Under $100', '$100–$300', '$300–$600', '$600+'];
-  const YESNO    = [{ v: 'yes', l: 'Yes' }, { v: 'no', l: 'No' }, { v: 'unsure', l: 'Not sure yet' }];
-  const CHANNELS = [
-    { v: 'whatsapp', l: 'WhatsApp' },
-    { v: 'email',    l: 'Email'    },
-    { v: 'telegram', l: 'Telegram' }
+  /* option VALUES stay language-independent keys; labels localize */
+  const BUDGET_KEYS = ['under100', '100-300', '300-600', '600plus'];
+  const YESNO = [
+    { v: 'yes',    en: 'Yes',           it: 'Sì' },
+    { v: 'no',     en: 'No',            it: 'No' },
+    { v: 'unsure', en: 'Not sure yet',  it: 'Non lo so ancora' }
   ];
+  const BUDGETS = [
+    { v: 'under100', en: 'Under $100',  it: 'Sotto i $100' },
+    { v: '100-300',  en: '$100–$300',   it: '$100–$300'    },
+    { v: '300-600',  en: '$300–$600',   it: '$300–$600'    },
+    { v: '600plus',  en: '$600+',       it: '$600+'        }
+  ];
+  const CHANNELS = [
+    { v: 'whatsapp', en: 'WhatsApp', it: 'WhatsApp' },
+    { v: 'email',    en: 'Email',    it: 'Email'    },
+    { v: 'telegram', en: 'Telegram', it: 'Telegram' }
+  ];
+
+  const hasI18N = () => typeof window.NicozI18N !== 'undefined';
+  const lang    = () => (hasI18N() ? window.NicozI18N.lang : 'en');
+  const pick    = (en, it) => (lang() === 'it' ? it : en);
+
+  /* localized product view: reads products.json `it` block */
+  const loc = o => (lang() === 'it' && o.it) ? { ...o, ...o.it } : o;
+
+  const labelOf = (list, v) => {
+    const found = list.find(x => x.v === v);
+    return found ? pick(found.en, found.it) : '—';
+  };
+
+  const T = { /* runtime sentences */
+    selected  : { en: ' selected',        it: ' selezionati' },
+    attFile   : { en: 'Attach optional file', it: 'Allega un file (opzionale)' },
+    tooLarge  : { en: 'File too large (max 5 MB).', it: 'File troppo grande (max 5 MB).' },
+    att       : { en: ' Attached (',      it: ' Allegato (' },
+    notSpec   : { en: 'Not specified',    it: 'Non specificato' },
+    est       : { en: 'Estimate',         it: 'Stima' },
+    dtProject : { en: 'Project',          it: 'Progetto' },
+    dtIdea    : { en: 'Idea',             it: 'Idea' },
+    dtDesign  : { en: 'Design',           it: 'Design' },
+    dtDomain  : { en: 'Domain',           it: 'Dominio' },
+    dtLaunch  : { en: 'Launch',           it: 'Lancio' },
+    dtBudget  : { en: 'Budget',           it: 'Budget' },
+    dtFile    : { en: 'File',             it: 'File' },
+    waTitle   : { en: 'New idea request', it: 'Nuova richiesta idea' },
+    waProd    : { en: 'Products',         it: 'Prodotti' },
+    waEst     : { en: 'Estimate',         it: 'Stima' },
+    waProj    : { en: 'Project',          it: 'Progetto' },
+    waDesign  : { en: 'Design/mockup',    it: 'Design/bozza' },
+    waDomain  : { en: 'Domain/hosting',   it: 'Dominio/hosting' },
+    waLaunch  : { en: 'Launch date',      it: 'Data di lancio' },
+    waFile    : { en: 'Mockup file ready: I will attach it in the chat',
+                  it: 'File bozza pronto: lo allego nella chat' },
+    waFrom    : { en: 'From',             it: 'Da' },
+    waChannel : { en: 'Preferred contact', it: 'Contatto preferito' },
+    waNotes   : { en: 'Notes',            it: 'Note' },
+    mailSub   : { en: 'Idea request',     it: 'Richiesta idea'    },
+    mo        : { en: '/mo',              it: '/mese' }
+  };
 
   /* ── data ─────────────────────────────────────────────── */
   let contact = { ...DEFAULT_CONTACT };
@@ -154,26 +210,34 @@
 
   /* ── step 1: product chips ────────────────────────────── */
   const chipsWrap = $('#wiz-chips');
+
+  const renderChips = () => {
+    if (!chipsWrap) return;
+    chipsWrap.innerHTML = products.map(raw => {
+      const p = loc(raw);
+      return (
+        '<button type="button" class="wiz-chip" data-slug="' + raw.slug + '">' +
+          '<span class="wiz-chip-emoji" aria-hidden="true">' + raw.emoji + '</span>' +
+          '<span class="wiz-chip-info"><b>' + p.name + '</b>' +
+          '<i>' + p.tagline + '</i></span>' +
+          '<span class="wiz-chip-price">' + fmt(raw.price) +
+          (raw.billing === 'monthly' ? pick('/mo', '/mese') : '') + '</span>' +
+          '<span class="wiz-chip-check">✓</span>' +
+        '</button>'
+      );
+    }).join('');
+    syncChips();
+  };
+
+  const syncChips = () => { if (chipsWrap) $$('.wiz-chip', chipsWrap).forEach(chip =>
+    chip.classList.toggle('selected', state.productSlugs.includes(chip.dataset.slug))); };
+
+  const syncChipCount = () => {
+    const el = $('#wiz-chip-count');
+    if (el) el.textContent = state.productSlugs.length + pick(T.selected.en, T.selected.it);
+  };
+
   if (chipsWrap) {
-    chipsWrap.innerHTML = products.map(p => (
-      '<button type="button" class="wiz-chip" data-slug="' + p.slug + '">' +
-        '<span class="wiz-chip-emoji" aria-hidden="true">' + p.emoji + '</span>' +
-        '<span class="wiz-chip-info"><b>' + p.name + '</b>' +
-        '<i>' + p.tagline + '</i></span>' +
-        '<span class="wiz-chip-price">' + fmt(p.price) +
-        (p.billing === 'monthly' ? '/mo' : '') + '</span>' +
-        '<span class="wiz-chip-check">✓</span>' +
-      '</button>'
-    )).join('');
-
-    const syncChips = () => $$('.wiz-chip', chipsWrap).forEach(chip =>
-      chip.classList.toggle('selected', state.productSlugs.includes(chip.dataset.slug)));
-
-    const syncChipCount = () => {
-      const el = $('#wiz-chip-count');
-      if (el) el.textContent = state.productSlugs.length + ' selected';
-    };
-
     chipsWrap.addEventListener('click', e => {
       const chip = e.target.closest('.wiz-chip');
       if (!chip) return;
@@ -198,8 +262,6 @@
     const bundle = bundles.find(b => b.slug === params.get('bundle'));
     if (bundle) state.productSlugs = [...(bundle.includes || [])];
   }
-  if (chipsWrap) $$('.wiz-chip', chipsWrap).forEach(chip =>
-    chip.classList.toggle('selected', state.productSlugs.includes(chip.dataset.slug)));
 
   /* ── step 2: fields + option groups ───────────────────── */
   const descEl = $('#f-desc');
@@ -218,26 +280,31 @@
 
   const buildOptions = (wrapEl, list, key) => {
     if (!wrapEl) return;
-    wrapEl.innerHTML = list.map(o => {
-      const v = typeof o === 'string' ? o : o.v;
-      const l = typeof o === 'string' ? o : o.l;
-      return '<button type="button" class="wiz-option" data-v="' + v + '">' + l + '</button>';
-    }).join('');
+    wrapEl.innerHTML = list.map(o =>
+      '<button type="button" class="wiz-option" data-v="' + o.v + '">' +
+      pick(o.en, o.it) + '</button>'
+    ).join('');
     const sync = () => $$('.wiz-option', wrapEl).forEach(b =>
       b.classList.toggle('selected', String(state[key]) === b.dataset.v));
-    wrapEl.addEventListener('click', e => {
-      const b = e.target.closest('.wiz-option');
-      if (!b) return;
-      state[key] = b.dataset.v;
-      sync();
-      saveDraft();
-    });
+    if (wrapEl.dataset.bound !== '1') {
+      wrapEl.addEventListener('click', e => {
+        const b = e.target.closest('.wiz-option');
+        if (!b) return;
+        state[key] = b.dataset.v;
+        sync();
+        saveDraft();
+      });
+      wrapEl.dataset.bound = '1';
+    }
+    sync();
   };
 
-  buildOptions($('#f-design'), YESNO, 'design');
-  buildOptions($('#f-domain'), YESNO, 'domain');
-  buildOptions($( '#f-budget'), BUDGETS, 'budget');
-  buildOptions($('#f-channel'), CHANNELS, 'channel');
+  const renderOptions = () => {
+    buildOptions($('#f-design'), YESNO, 'design');
+    buildOptions($('#f-domain'), YESNO, 'domain');
+    buildOptions($('#f-budget'), BUDGETS, 'budget');
+    buildOptions($('#f-channel'), CHANNELS, 'channel');
+  };
 
   const nameEl = $('#f-project');
   if (nameEl) nameEl.addEventListener('input', () => { state.projectName = nameEl.value; saveDraft(); });
@@ -245,18 +312,24 @@
   if (dateEl) dateEl.addEventListener('change', () => { state.date = dateEl.value; saveDraft(); });
   const fileEl = $('#f-file');
   const fileLabel = $('#f-file-label');
+  const setFileLabel = () => {
+    if (fileLabel)
+      fileLabel.textContent = file
+        ? '📎 ' + file.name
+        : pick(T.attFile.en, T.attFile.it);
+  };
   if (fileEl) {
     fileEl.addEventListener('change', () => {
       file = fileEl.files && fileEl.files[0] ? fileEl.files[0] : null;
       if (file && file.size > FILE_MAX) {
         file = null;
         fileEl.value = '';
-        $('#err-file').textContent = 'File too large (max 5 MB).';
+        $('#err-file').textContent = pick(T.tooLarge.en, T.tooLarge.it);
         $('#err-file').classList.add('show');
         return;
       }
       $('#err-file').classList.remove('show');
-      if (fileLabel) fileLabel.textContent = file ? '📎 ' + file.name : 'Attach optional file';
+      setFileLabel();
       const wrap = fileEl.closest('.wiz-file');
       if (wrap) wrap.classList.toggle('hasfile', !!file);
     });
@@ -311,29 +384,29 @@
     const box = $(reviewBox);
     if (!box) return;
     const { oneTime, monthly } = estimate();
-    const detail = (k, fallback) => {
-      const o = YESNO.find(x => x.v === k);
-      return o ? o.l : fallback;
-    };
     box.innerHTML =
       '<dl>' +
-        (state.projectName   ? '<div><dt>Project</dt><dd>' + esc(state.projectName) + '</dd></div>' : '') +
-        (state.description   ? '<div><dt>Idea</dt><dd>' + esc(state.description.slice(0, 120)) +
+        (state.projectName   ? '<div><dt>' + pick(T.dtProject.en, T.dtProject.it) + '</dt><dd>' + esc(state.projectName) + '</dd></div>' : '') +
+        (state.description   ? '<div><dt>' + pick(T.dtIdea.en, T.dtIdea.it) + '</dt><dd>' + esc(state.description.slice(0, 120)) +
                                (state.description.length > 120 ? '…' : '') + '</dd></div>' : '') +
-        '<div><dt>Design</dt><dd>' + detail(state.design, '—') + '</dd></div>' +
-        '<div><dt>Domain</dt><dd>' + detail(state.domain, '—') + '</dd></div>' +
-        (state.date          ? '<div><dt>Launch</dt><dd>' + esc(state.date) + '</dd></div>' : '') +
-        '<div><dt>Budget</dt><dd>' + (state.budget || 'Not specified') + '</dd></div>' +
-        (file                ? '<div><dt>File</dt><dd> Attached (' + esc(file.name) + ')</dd></div>' : '') +
+        '<div><dt>' + pick(T.dtDesign.en, T.dtDesign.it) + '</dt><dd>' + labelOf(YESNO, state.design) + '</dd></div>' +
+        '<div><dt>' + pick(T.dtDomain.en, T.dtDomain.it) + '</dt><dd>' + labelOf(YESNO, state.domain) + '</dd></div>' +
+        (state.date          ? '<div><dt>' + pick(T.dtLaunch.en, T.dtLaunch.it) + '</dt><dd>' + esc(state.date) + '</dd></div>' : '') +
+        '<div><dt>' + pick(T.dtBudget.en, T.dtBudget.it) + '</dt><dd>' +
+          (state.budget ? esc(labelOf(BUDGETS, state.budget)) : pick(T.notSpec.en, T.notSpec.it)) + '</dd></div>' +
+        (file                ? '<div><dt>' + pick(T.dtFile.en, T.dtFile.it) + '</dt><dd>' +
+          pick(T.att.en, T.att.it) + esc(file.name) + ')</dd></div>' : '') +
       '</dl>' +
       '<div class="wiz-review-products">' +
-        chosenProducts().map(p =>
-          '<div><b>' + p.emoji + ' ' + p.name + '</b><i>' +
-          fmt(p.price) + (p.billing === 'monthly' ? '/mo' : '') + '</i></div>').join('') +
+        chosenProducts().map(raw => {
+          const p = loc(raw);
+          return '<div><b>' + raw.emoji + ' ' + p.name + '</b><i>' +
+            fmt(raw.price) + (raw.billing === 'monthly' ? pick(T.mo.en, T.mo.it) : '') + '</i></div>';
+        }).join('') +
       '</div>' +
-      '<div class="wiz-review-total"><dt>Estimate</dt>' +
+      '<div class="wiz-review-total"><dt>' + pick(T.est.en, T.est.it) + '</dt>' +
       '<dd>' + (oneTime ? fmt(oneTime) : '—') +
-        (monthly ? ' <em>+' + fmt(monthly) + '/mo</em>' : '') +
+        (monthly ? ' <em>+' + fmt(monthly) + pick(T.mo.en, T.mo.it) + '</em>' : '') +
       '</dd></div>';
   };
 
@@ -342,43 +415,41 @@
 
   const buildMessage = ref => {
     const { oneTime, monthly } = estimate();
+    const mo = pick(T.mo.en, T.mo.it);
     const lines = [];
-    lines.push('*New idea request ' + ref + '*');
+    lines.push('*' + pick(T.waTitle.en, T.waTitle.it) + ' ' + ref + '*');
     lines.push('');
-    lines.push('*Products*');
-    chosenProducts().forEach(p =>
-      lines.push('• ' + p.name + ' — ' + fmt(p.price) + (p.billing === 'monthly' ? '/mo' : '')));
+    lines.push('*' + pick(T.waProd.en, T.waProd.it) + '*');
+    chosenProducts().forEach(raw => {
+      const p = loc(raw);
+      lines.push('• ' + p.name + ' — ' + fmt(raw.price) +
+        (raw.billing === 'monthly' ? mo : ''));
+    });
     if (oneTime || monthly) {
-      lines.push('*Estimate* ' + (oneTime ? fmt(oneTime) : '') +
-        (monthly ? (oneTime ? ' + ' : '') + fmt(monthly) + '/mo' : ''));
+      lines.push('*' + pick(T.waEst.en, T.waEst.it) + '* ' + (oneTime ? fmt(oneTime) : '') +
+        (monthly ? (oneTime ? ' + ' : '') + fmt(monthly) + mo : ''));
     }
-    if (state.projectName) { lines.push(''); lines.push('*Project* ' + state.projectName); }
+    if (state.projectName) {
+      lines.push('');
+      lines.push('*' + pick(T.waProj.en, T.waProj.it) + '* ' + state.projectName);
+    }
     if (state.description) {
       lines.push('');
       lines.push(state.description);
     }
     lines.push('');
-    lines.push('• Design/mockup: ' + detailLabel(state.design));
-    lines.push('• Domain/hosting: ' + detailLabel(state.domain));
-    if (state.date)   lines.push('• Launch date: ' + state.date);
-    if (state.budget) lines.push('• Budget: ' + state.budget);
-    if (file)         lines.push('• Mockup file ready: I will attach it in the chat');
+    lines.push('• ' + pick(T.waDesign.en, T.waDesign.it) + ': ' + labelOf(YESNO, state.design));
+    lines.push('• ' + pick(T.waDomain.en, T.waDomain.it) + ': ' + labelOf(YESNO, state.domain));
+    if (state.date)   lines.push('• ' + pick(T.waLaunch.en, T.waLaunch.it) + ': ' + state.date);
+    if (state.budget) lines.push('• ' + pick(T.dtBudget.en, T.dtBudget.it) + ': ' + labelOf(BUDGETS, state.budget));
+    if (file)         lines.push('• ' + pick(T.waFile.en, T.waFile.it));
     lines.push('');
-    lines.push('*From* ' + state.name);
+    lines.push('*' + pick(T.waFrom.en, T.waFrom.it) + '* ' + state.name);
     lines.push('• Email: ' + state.email);
     if (state.phone) lines.push('• WhatsApp: ' + state.phone);
-    lines.push('• Preferred contact: ' + channelLabel(state.channel));
-    if (state.notes) { lines.push(''); lines.push('*Notes* ' + state.notes); }
+    lines.push('• ' + pick(T.waChannel.en, T.waChannel.it) + ': ' + labelOf(CHANNELS, state.channel));
+    if (state.notes) { lines.push(''); lines.push('*' + pick(T.waNotes.en, T.waNotes.it) + '* ' + state.notes); }
     return lines.join('\n');
-  };
-
-  const detailLabel = v => {
-    const found = YESNO.find(x => x.v === v);
-    return found ? found.l : '—';
-  };
-  const channelLabel = v => {
-    const found = CHANNELS.find(x => x.v === v);
-    return found ? found.l : '—';
   };
 
   /* success view */
@@ -388,7 +459,8 @@
       'https://wa.me/' + contact.whatsapp + '?text=' + encodeURIComponent(msg);
     const mailHref =
       'mailto:' + contact.email + '?subject=' +
-      encodeURIComponent('Idea request ' + ref) + '&body=' + encodeURIComponent(msg);
+      encodeURIComponent(pick(T.mailSub.en, T.mailSub.it) + ' ' + ref) +
+      '&body=' + encodeURIComponent(msg);
 
     const panel = $('#step-success');
     if (!panel) return;
@@ -424,25 +496,22 @@
     });
   }
 
-  /* re-render the review when step 3 activates (handled in goTo) */
-
-  /* restore option chip states from a loaded draft */
-  const syncAllOptions = () => {
-    [['#f-design', 'design'], ['#f-domain', 'domain'],
-     ['#f-budget', 'budget'], ['#f-channel', 'channel']].forEach(([sel, key]) => {
-      const wrap = $(sel);
-      if (!wrap) return;
-      $$('.wiz-option', wrap).forEach(b =>
-        b.classList.toggle('selected', String(state[key]) === b.dataset.v));
-    });
+  /* ── live language switch ─────────────────────────────── */
+  const relocalize = () => {
+    renderChips();
+    renderOptions();
+    syncChipCount();
+    setFileLabel();
+    if (step === 3 || $('#step-success').classList.contains('active')) {
+      renderReview();
+    }
   };
+  window.addEventListener('nicoz:lang', relocalize);
 
-  /* first paint */
+  /* ── first paint ──────────────────────────────────────── */
+  renderChips();
+  renderOptions();
   goTo(1);
-  syncAllOptions();
-  {
-    const el = $('#wiz-chip-count');
-    if (el) el.textContent = state.productSlugs.length + ' selected';
-  }
+  syncChipCount();
 
 })();

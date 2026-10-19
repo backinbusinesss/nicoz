@@ -2,6 +2,9 @@
    NICOZ — CATALOGO
    Renders products + bundles from products.json / bundles.json.
    Categories: website / discord / telegram / app (filter tabs).
+   Localized: static JSON fields use the `it` block when
+   window.NicozI18N.lang === 'it' (falls back to English), and
+   everything re-renders on the `nicoz:lang` event.
    Falls back to a friendly error state if the JSON is missing.
    Also powers the dark/light reading toggle (catalog page only).
    ═══════════════════════════════════════════════════════════ */
@@ -10,6 +13,10 @@
   const $  = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
+  const hasI18N  = () => typeof window.NicozI18N !== 'undefined';
+  const lang     = () => (hasI18N() ? window.NicozI18N.lang : 'en');
+  const pick     = (en, it) => (lang() === 'it' ? it : en);
+
   const DEFAULT_CONTACT = {
     email: 'nicoz@secria.me',
     whatsapp: '18734741519',
@@ -17,11 +24,8 @@
   };
 
   const CATEGORY_LABELS = {
-    all:      'All',
-    website:  'Website',
-    discord:  'Discord',
-    telegram: 'Telegram',
-    app:      'App'
+    en: { all: 'All', website: 'Website', discord: 'Discord', telegram: 'Telegram', app: 'App' },
+    it: { all: 'Tutti', website: 'Website', discord: 'Discord', telegram: 'Telegram', app: 'App' }
   };
   const CATEGORY_ORDER = ['all', 'website', 'discord', 'telegram', 'app'];
 
@@ -47,7 +51,7 @@
     bundles  = Array.isArray(b.bundles)  ? b.bundles  : [];
     updated  = p.updated || null;
     categoryTags = Array.isArray(p.categories)
-      ? p.categories.filter(c => CATEGORY_LABELS[c])
+      ? p.categories.filter(c => CATEGORY_LABELS.en[c])
       : null;
     if (p.contact) contact = p.contact;
   } catch (err) {
@@ -56,6 +60,10 @@
   }
 
   const fmt = n => '$' + n;
+
+  /* localized view of a product/bundle: the `it` block overrides
+     name/tagline/description/includes/upsell when lang === 'it' */
+  const loc = o => (lang() === 'it' && o.it) ? { ...o, ...o.it } : o;
 
   const waLink = text =>
     'https://wa.me/' + contact.whatsapp + '?text=' + encodeURIComponent(text);
@@ -68,32 +76,38 @@
     '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>';
 
   const productCard = prod => {
-    const badge = prod.billing === 'monthly' ? 'per month' : 'one-time';
-    const waMsg = 'Hi Nicoz! I am interested in ' + prod.name +
-                  ' (' + fmt(prod.price) + (prod.billing === 'monthly' ? '/month' : '') + ').';
-    const upsell = prod.upsell
-      ? '<span class="c-card-upsell">' + prod.upsell + '</span>' : '';
+    const p = loc(prod);
+    const badge = p.billing === 'monthly'
+      ? pick('per month', 'al mese')
+      : pick('one-time', 'una tantum');
+    const waMsg = lang() === 'it'
+      ? 'Ciao Nicoz! Vorrei ordinare: ' + p.name +
+        ' (' + fmt(p.price) + (p.billing === 'monthly' ? '/mese' : '') + ').'
+      : 'Hi Nicoz! I am interested in ' + p.name +
+        ' (' + fmt(p.price) + (p.billing === 'monthly' ? '/month' : '') + ').';
+    const upsell = p.upsell
+      ? '<span class="c-card-upsell">' + p.upsell + '</span>' : '';
     return (
       '<article class="c-card">' +
-        '<span class="c-card-emoji" aria-hidden="true">' + prod.emoji + '</span>' +
-        '<h3>' + prod.name + '</h3>' +
-        '<p class="c-card-tagline">' + prod.description + '</p>' +
+        '<span class="c-card-emoji" aria-hidden="true">' + p.emoji + '</span>' +
+        '<h3>' + p.name + '</h3>' +
+        '<p class="c-card-tagline">' + p.description + '</p>' +
         '<ul class="c-card-includes">' +
-          prod.includes.map(i => '<li>' + i + '</li>').join('') +
+          p.includes.map(i => '<li>' + i + '</li>').join('') +
         '</ul>' +
         upsell +
         '<div class="c-card-price">' +
-          '<span class="price">' + fmt(prod.price) + '</span>' +
-          '<span class="c-badge">' + badge + ' · ' + prod.delivery + '</span>' +
+          '<span class="price">' + fmt(p.price) + '</span>' +
+          '<span class="c-badge">' + badge + ' · ' + p.delivery + '</span>' +
         '</div>' +
         '<div class="c-card-actions">' +
           '<a class="btn btn-solid" target="_blank" rel="noopener"' +
-             ' aria-label="Order ' + prod.name + ' on WhatsApp"' +
-             ' href="' + waLink(waMsg) + '">Order' +
+             ' aria-label="Order ' + p.name + ' on WhatsApp"' +
+             ' href="' + waLink(waMsg) + '">' + pick('Order', 'Ordina') +
              ICON_ARROW +
           '</a>' +
           '<a class="btn btn-ghost" href="build?product=' + encodeURIComponent(prod.slug) + '">' +
-            'Request it' +
+            pick('Request it', 'Richiedilo') +
           '</a>' +
         '</div>' +
       '</article>'
@@ -108,6 +122,9 @@
   const availableCategories = (categoryTags || CATEGORY_ORDER.slice(1))
     .filter(c => products.some(p => p.category === c));
 
+  const catLabel = cat =>
+    CATEGORY_LABELS[lang()] && CATEGORY_LABELS[lang()][cat] || CATEGORY_LABELS.en[cat];
+
   const renderFilter = () => {
     if (!filterWrap) return;
     const counts = cat => cat === 'all'
@@ -117,9 +134,9 @@
     filterWrap.innerHTML = tabs.map(cat =>
       '<button type="button" class="cf-btn' +
       (cat === currentFilter ? ' active' : '') + '"' +
-      (cat !== 'all' ? ' data-cat="' + cat + '"' : ' data-cat="all"') +
+      ' data-cat="' + cat + '"' +
       ' role="tab" aria-selected="' + (cat === currentFilter ? 'true' : 'false') + '">' +
-        CATEGORY_LABELS[cat] +
+        catLabel(cat) +
         '<span class="cf-count">' + counts(cat) + '</span>' +
       '</button>'
     ).join('');
@@ -129,11 +146,15 @@
     if (!productsGrid) return;
     if (failed) {
       productsGrid.innerHTML =
-        '<div class="c-card"><h3>Catalog unavailable</h3>' +
-        '<p class="c-card-tagline">Could not load the catalog. Please refresh the page, ' +
-        'or reach out on WhatsApp.</p>' +
+        '<div class="c-card"><h3>' + pick('Catalog unavailable', 'Catalogo non disponibile') + '</h3>' +
+        '<p class="c-card-tagline">' +
+        pick('Could not load the catalog. Please refresh the page, or reach out on WhatsApp.',
+             'Non è stato possibile caricare il catalogo. Ricarica la pagina, o scrivimi su WhatsApp.') +
+        '</p>' +
         '<div class="c-card-actions"><a class="btn btn-solid" target="_blank" rel="noopener" ' +
-        'href="' + waLink('Hi Nicoz! Your catalog page did not load for me.') + '">WhatsApp</a></div></div>';
+        'href="' + waLink(pick('Hi Nicoz! Your catalog page did not load for me.',
+                              'Ciao Nicoz! La pagina catalogo non mi ha caricato.')) +
+        '">WhatsApp</a></div></div>';
       return;
     }
     const shown = currentFilter === 'all'
@@ -142,9 +163,22 @@
     productsGrid.innerHTML = shown.map(productCard).join('');
   };
 
-  if (filterWrap) {
+  const renderMeta = () => {
+    const meta = $('#c-product-meta');
+    if (!meta) return;
+    meta.textContent =
+      products.length + ' ' + pick('services', 'servizi') +
+      (updated ? (lang() === 'it' ? ' · aggiornato ' + updated : ' · updated ' + updated) : '');
+  };
+
+  const renderAll = () => {
     renderFilter();
     renderProducts();
+    renderMeta();
+    renderBundles();
+  };
+
+  if (filterWrap) {
     filterWrap.addEventListener('click', e => {
       const btn = e.target.closest('.cf-btn');
       if (!btn) return;
@@ -152,53 +186,59 @@
       renderFilter();
       renderProducts();
     });
-  } else {
-    renderProducts();
   }
-
-  const meta = $('#c-product-meta');
-  if (meta) meta.textContent = products.length + ' services' +
-    (updated ? ' · updated ' + updated : '');
 
   /* ── render bundles ──────────────────────────────────── */
   const bundlesGrid = $('#c-bundles');
-  if (bundlesGrid && !failed) {
+
+  const renderBundles = () => {
+    if (!bundlesGrid || failed) return;
     const bySlug = Object.fromEntries(products.map(p => [p.slug, p]));
-    bundlesGrid.innerHTML = bundles.map(bundle => {
-      const items = (bundle.includes || [])
+    bundlesGrid.innerHTML = bundles.map(raw => {
+      const bundle = loc(raw);
+      const items = (raw.includes || [])
         .map(s => bySlug[s]).filter(Boolean);
       const value = items.reduce((sum, p) => sum + p.price, 0);
-      const save  = value - bundle.price;
-      const featured = bundle.slug === 'full-stack' ? ' is-featured' : '';
+      const save  = value - raw.price;
+      const featured = raw.slug === 'full-stack' ? ' is-featured' : '';
       return (
         '<article class="c-bundle' + featured + '">' +
           '<div class="c-bundle-top">' +
-            '<span class="c-bundle-emoji" aria-hidden="true">' + bundle.emoji + '</span>' +
-            '<div><p class="c-bundle-tag">Bundle · save ' + fmt(save) + '</p>' +
+            '<span class="c-bundle-emoji" aria-hidden="true">' + raw.emoji + '</span>' +
+            '<div><p class="c-bundle-tag">' +
+              pick('Bundle', 'Bundle') + ' · ' + pick('save', 'risparmi') + ' ' + fmt(save) + '</p>' +
             '<h3>' + bundle.name + '</h3></div>' +
           '</div>' +
-          '<p class="c-bundle-desc">' + bundle.tagline + '</p>' +
+          '<p class="c-bundle-desc">' + (bundle.tagline || '') + '</p>' +
           '<ul class="c-bundle-items">' +
-            items.map(p => '<li><b>' + p.name + '</b><i>' + fmt(p.price) + '</i></li>').join('') +
+            items.map(p => {
+              const l = loc(p);
+              return '<li><b>' + l.name + '</b><i>' + fmt(p.price) + '</i></li>';
+            }).join('') +
           '</ul>' +
           '<div class="c-bundle-price">' +
-            '<span class="price">' + fmt(bundle.price) + '</span>' +
-            (save > 0 ? '<span class="c-save">Save ' + fmt(save) + '</span>' : '') +
-            (value > bundle.price ? '<span class="c-was">' + fmt(value) + '</span>' : '') +
+            '<span class="price">' + fmt(raw.price) + '</span>' +
+            (save > 0 ? '<span class="c-save">' + pick('Save', 'Risparmi') + ' ' + fmt(save) + '</span>' : '') +
+            (value > raw.price ? '<span class="c-was">' + fmt(value) + '</span>' : '') +
           '</div>' +
           '<div class="c-card-actions">' +
             '<a class="btn btn-solid" target="_blank" rel="noopener"' +
-               ' href="' + waLink('Hi Nicoz! I am interested in the ' + bundle.name + ' bundle (' + fmt(bundle.price) + ').') + '">' +
+               ' href="' + waLink(lang() === 'it'
+                 ? 'Ciao Nicoz! Vorrei ordinare il bundle ' + bundle.name + ' (' + fmt(raw.price) + ').'
+                 : 'Hi Nicoz! I am interested in the ' + bundle.name + ' bundle (' + fmt(raw.price) + ').') +
+               '">' +
               'WhatsApp' + ICON_WA +
             '</a>' +
-            '<a class="btn btn-ghost" href="build?bundle=' + encodeURIComponent(bundle.slug) + '">' +
-              'Request it' +
+            '<a class="btn btn-ghost" href="build?bundle=' + encodeURIComponent(raw.slug) + '">' +
+              pick('Request it', 'Richiedilo') +
             '</a>' +
           '</div>' +
         '</article>'
       );
     }).join('');
-  }
+  };
+
+  renderAll();
 
   /* ── reading theme toggle (catalog page only) ────────── */
   const main = $('.c-main');
@@ -219,5 +259,8 @@
     try { saved = localStorage.getItem(THEME_KEY) || 'dark'; } catch { /* */ }
     apply(saved);
   }
+
+  /* ── live language switch: re-render everything ───────── */
+  window.addEventListener('nicoz:lang', renderAll);
 
 })();

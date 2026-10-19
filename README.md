@@ -87,3 +87,27 @@ Push to `main` â€” GitHub Pages publishes automatically.
 the request there (saving it server-side with a server-assigned
 `#IDEA-XXXX` reference) and gracefully falls back to the WhatsApp flow if the
 API is unreachable.
+
+
+## Languages (EN default + Italian switch)
+
+- Default language: **English**. The EN | IT pill (nav + mobile menu) switches
+  language live; the choice is saved in localStorage (
+icoz-lang).
+- js/i18n.js holds the IT translations of all static UI texts, keyed by CSS
+  selector, as [EN, IT] pairs. It also injects the switch pill — no HTML
+  changes needed when adding pages: just load the script and it works.
+- Dynamic content follows window.NicozI18N.lang:
+  - products.json / undles.json: each product/bundle can have an optional
+    it block (
+ame, 	agline, description, includes, upsell) used on
+    the Italian site; missing fields fall back to English.
+  - js/catalog.js / js/build.js: labels, badges, validation and the
+    pre-filled WhatsApp message re-render in the active language (event
+    
+icoz:lang).
+- The legal pages (	ermini.html, cookie.html) are Italian-only by design
+  and do not load i18n.js.
+- The site icon lives in img/ (avicon-32.png, pple-touch-icon.png,
+  og-icon.png), generated from the original PNG in Downloads. Regenerate
+  with any square image + a 32 / 180 / 512 resize.

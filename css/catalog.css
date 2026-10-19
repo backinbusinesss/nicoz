@@ -656,3 +656,43 @@ input.invalid, textarea.invalid {
   .fab { transition: none; }
   .wiz-panel.active { animation: none; }
 }
+
+
+/* -- language switch (EN | IT pill, injected by i18n.js) -- */
+.lang-switch {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+  background: var(--surface);
+  flex: none;
+}
+.lang-switch button {
+  font-family: var(--font-m);
+  font-size: .6rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  padding: .5rem .75rem;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: color .25s var(--ease), background .25s var(--ease);
+}
+.lang-switch button + button { border-left: 1px solid var(--border); }
+.lang-switch button:hover { color: var(--white); }
+.lang-switch button.active {
+  color: #fff;
+  background: rgba(124,58,237,.4);
+}
+.lang-switch button:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: -2px;
+}
+.nav-end .lang-switch { margin-right: .9rem; }
+.nav-panel-foot .lang-switch { margin-bottom: 1.1rem; align-self: flex-start; }
+.nav-panel-foot {
+  display: flex;
+  flex-direction: column;
+}

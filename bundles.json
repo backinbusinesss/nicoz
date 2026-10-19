@@ -1,8 +1,8 @@
 {
-  "version": 1,
+  "version": 2,
   "updated": "2026-10-19",
   "currency": "$",
-  "_note": "Bundles combine products from products.json. `value` is the sum of the included product prices; `price` is the bundle price. Edit here when prices change in products.json.",
+  "_note": "Bundles combine products from products.json. The total value and the savings are computed automatically. The optional `it` block overrides name/tagline on the Italian site; missing fields fall back to English.",
   "bundles": [
     {
       "id": "b01",
@@ -12,6 +12,9 @@
       "price": 130,
       "includes": ["static-website", "brand-kit", "seo-speed"],
       "tagline": "Everything you need to get online fast: site, logo and SEO base.",
+      "it": {
+        "tagline": "Il minimo indispensabile per essere online al più presto: sito, logo e SEO di base."
+      },
       "cta": "Start here"
     },
     {
@@ -22,6 +25,9 @@
       "price": 150,
       "includes": ["static-website", "discord-bot", "seo-speed"],
       "tagline": "Site, community bot and SEO base: everything a team or club needs.",
+      "it": {
+        "tagline": "Sito, bot per la community e SEO di base: tutto ciò che serve a un team o a un club."
+      },
       "cta": "Build my community"
     },
     {
@@ -32,6 +38,9 @@
       "price": 250,
       "includes": ["static-website", "ecommerce", "custom-design"],
       "tagline": "Mobile-first online store: design, pages and direct ordering.",
+      "it": {
+        "tagline": "Negozio online mobile-first: design, pagine e ordini diretti."
+      },
       "cta": "Sell on mobile"
     },
     {
@@ -42,6 +51,9 @@
       "price": 290,
       "includes": ["static-website", "cms-admin", "discord-bot", "seo-speed"],
       "tagline": "Website, admin panel and community bot, all connected.",
+      "it": {
+        "tagline": "Sito, pannello admin e bot community, tutto connesso."
+      },
       "cta": "Get the stack"
     },
     {
@@ -52,6 +64,10 @@
       "price": 540,
       "includes": ["one-page-landing", "static-website", "custom-design", "brand-kit", "seo-speed", "3d-motion", "cms-admin", "ecommerce", "discord-bot", "telegram-bot", "web-app-pwa"],
       "tagline": "Every product in the catalog, bundled and delivered in order.",
+      "it": {
+        "name": "Everything",
+        "tagline": "Ogni prodotto del catalogo, in bundle e consegnato in ordine."
+      },
       "cta": "Take it all"
     }
   ]

@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "updated": "2026-10-19",
   "currency": "$",
   "categories": ["website", "discord", "telegram", "app"],
@@ -8,7 +8,7 @@
     "whatsapp": "18734741519",
     "whatsappDisplay": "+1 (873) 474-1519"
   },
-  "_note": "Single source of truth for the Nicoz services catalog. The website catalog page and the WhatsApp Business catalog export both read from this file. Edit prices/descriptions here site-wide. `category` drives the catalog filter tabs (website / discord / telegram / app).",
+  "_note": "Single source of truth for the Nicoz services catalog: the catalog page and the wizard both read this file. `category` drives the catalog filter tabs (website / discord / telegram / app). The optional `it` block per product overrides name/tagline/description/includes/upsell on the Italian site; missing `it` fields fall back to English. Prices live here only.",
   "products": [
     {
       "id": "p01",
@@ -27,6 +27,18 @@
         "Deploy included",
         "2 revision rounds"
       ],
+      "it": {
+        "name": "One-Page Landing",
+        "tagline": "Una singola pagina orientata alla conversione per prodotto, evento o campagna",
+        "description": "Una pagina netta costruita attorno a un solo obiettivo: spiegare l'offerta e spingere il visitatore ad agire. Layout su misura, mobile-first, CTA WhatsApp integrata.",
+        "includes": [
+          "Design custom, niente template",
+          "Singola pagina, fino a 6 sezioni",
+          "CTA WhatsApp o form",
+          "Deploy incluso",
+          "2 giri di revisioni"
+        ]
+      },
       "delivery": "3–5 days",
       "cta": "Order"
     },
@@ -49,6 +61,20 @@
         "2 revision rounds"
       ],
       "upsell": "+$30 for every extra page (up to 6 total)",
+      "it": {
+        "name": "Sito Statico",
+        "tagline": "Un sito statico veloce e su misura, con più pagine, pronto SEO, perfetto su ogni dispositivo",
+        "description": "Un sito statico completo costruito da zero: caricamento rapido, codice pulito e un design che rispetta il tuo brand. Ideale per attività, menù, portfolio e presentazioni.",
+        "includes": [
+          "Fino a 3 pagine",
+          "Design responsive mobile-first",
+          "SEO di base (titoli, descrizioni, sitemap)",
+          "Form di contatto o bottone WhatsApp",
+          "Deploy gratuito",
+          "2 giri di revisioni"
+        ],
+        "upsell": "+$30 per ogni pagina extra (fino a 6 in totale)"
+      },
       "delivery": "5–7 days",
       "cta": "Order"
     },
@@ -60,7 +86,7 @@
       "emoji": "🎨",
       "price": 60,
       "billing": "one-time",
-      "tagline": "A complete design mockup of your site before a single line of code, layout, typography and colours defined with you",
+      "tagline": "A complete design mockup of your site before a single line of code — layout, typography and colours defined with you",
       "description": "The visual design of your site or page, delivered as high-fidelity mockups for desktop and mobile. You see exactly how it will look before development starts.",
       "includes": [
         "Desktop + mobile mockups",
@@ -69,6 +95,18 @@
         "Design files delivered",
         "Reusable for development later"
       ],
+      "it": {
+        "name": "Design Personalizzato (UI/UX)",
+        "tagline": "La grafica completa del tuo sito prima di una riga di codice: layout, tipografia e colori definiti insieme",
+        "description": "Il design visivo del tuo sito o della tua pagina, consegnato come mockup ad alta fedeltà per desktop e mobile. Vedi esattamente come sarà prima che parta lo sviluppo.",
+        "includes": [
+          "Mockup desktop + mobile",
+          "Layout, tipografia e sistema di colori",
+          "2 giri di revisioni",
+          "File di design consegnati",
+          "Riutilizzabili per lo sviluppo quando vuoi"
+        ]
+      },
       "delivery": "4–6 days",
       "cta": "Order"
     },
@@ -89,6 +127,18 @@
         "Social + web avatar",
         "PNG/SVG export"
       ],
+      "it": {
+        "name": "Brand Kit",
+        "tagline": "Logo, palette e font — un kit di identità piccolo ma completo, pronto per web, stampa e social",
+        "description": "Un'identità compatta: logo in più versioni, una palette di colori funzionante e l'abbinamento font. Tutto ciò che serve per essere coerenti ovunque.",
+        "includes": [
+          "Logo (2 varianti)",
+          "Palette di colori",
+          "Abbinamento font",
+          "Avatar social + web",
+          "Export PNG/SVG"
+        ]
+      },
       "delivery": "3–4 days",
       "cta": "Order"
     },
@@ -109,6 +159,18 @@
         "Image compression",
         "Before/after report"
       ],
+      "it": {
+        "name": "SEO & Velocità",
+        "tagline": "Caricamento più rapido e più visibilità su Google: meta tag, sitemap, immagini compresse e caching pulito",
+        "description": "Un passaggio tecnico sul tuo sito esistente: punteggio di performance, meta tag, sitemap, compressione immagini e caching. Visibilmente più veloce, più facile da trovare.",
+        "includes": [
+          "Passaggio performance (target 90+)",
+          "Titoli, descrizioni e anteprime social",
+          "Sitemap + indicizzazione di base",
+          "Compressione immagini",
+          "Report prima/dopo"
+        ]
+      },
       "delivery": "2–3 days",
       "cta": "Order"
     },
@@ -129,6 +191,18 @@
         "Performance guards on mobile",
         "Reduced-motion fallback"
       ],
+      "it": {
+        "name": "3D & Motion Pack",
+        "tagline": "Scene 3D interattive e animazioni allo scroll che rendono il tuo sito impossibile da dimenticare",
+        "description": "Il tocco inconfondibile di Nicoz: scene WebGL/Three.js, timeline GSAP guidate dallo scroll e micro-interazioni. Il movimento sostiene la storia invece di rallentare la pagina.",
+        "includes": [
+          "Hero 3D o motion",
+          "Animazioni legate allo scroll",
+          "Micro-interazioni",
+          "Guardie di performance su mobile",
+          "Fallback con movimento ridotto"
+        ]
+      },
       "delivery": "5–8 days",
       "cta": "Order"
     },
@@ -140,7 +214,7 @@
       "emoji": "🛠️",
       "price": 150,
       "billing": "one-time",
-      "tagline": "Edit text, images and prices from a private panel, no code needed. Perfect for content you update often",
+      "tagline": "Edit text, images and prices from a private panel — no code needed. Perfect for content you update often",
       "description": "A private admin panel where you manage your site's content yourself: text, images, prices, opening hours. Everything reflects on the site immediately.",
       "includes": [
         "Private admin panel",
@@ -149,6 +223,18 @@
         "Live changes on the site",
         "Walkthrough on hand-off"
       ],
+      "it": {
+        "name": "CMS & Pannello Admin",
+        "tagline": "Modifica testi, immagini e prezzi da un pannello privato — senza codice. Perfetto per contenuti che aggiorni spesso",
+        "description": "Un pannello admin privato dove gestisci da solo i contenuti del sito: testi, immagini, prezzi, orari. Tutto si riflette sul sito in tempo reale.",
+        "includes": [
+          "Pannello admin privato",
+          "Accesso con password",
+          "Sezioni modificabili decise insieme",
+          "Modifiche live sul sito",
+          "Walkthrough alla consegna"
+        ]
+      },
       "delivery": "7–10 days",
       "cta": "Order"
     },
@@ -169,6 +255,18 @@
         "Stock/prices editable",
         "Mobile-first layout"
       ],
+      "it": {
+        "name": "Negozio E-commerce",
+        "tagline": "Mostra i prodotti con prezzi, categorie e ordinazione diretta su WhatsApp — zero commissioni di marketplace",
+        "description": "Una vera esperienza di negozio: catalogo prodotti con categorie, pagine di dettaglio e checkout diretto via WhatsApp. Le tue vendite, la tua chat, zero commissioni.",
+        "includes": [
+          "Catalogo prodotti con categorie",
+          "Schede prodotto con prezzi",
+          "Ordini via WhatsApp",
+          "Stock e prezzi modificabili",
+          "Layout mobile-first"
+        ]
+      },
       "delivery": "7–12 days",
       "cta": "Order"
     },
@@ -189,6 +287,18 @@
         "Setup + hosting help",
         "Source handed over"
       ],
+      "it": {
+        "name": "Bot Discord & Community Tools",
+        "tagline": "Un bot custom per ordini, ticket e gestione della community — notifiche, ruoli e risposte automatiche",
+        "description": "Un bot Discord costruito attorno alla tua community: sistema di ticket, risposte automatiche, notifiche e moderazione di base. Configurato, ospitato e consegnato pronto.",
+        "includes": [
+          "Comandi personalizzati",
+          "Flusso ticket o ordini",
+          "Notifiche e ruoli",
+          "Setup + aiuto con l'hosting",
+          "Sorgente consegnata"
+        ]
+      },
       "delivery": "4–7 days",
       "cta": "Order"
     },
@@ -206,9 +316,21 @@
         "Small fixes and tweaks",
         "Content updates (texts, prices, images)",
         "Monthly health check",
-        " Priority support line",
+        "Priority support line",
         "Cancel anytime"
       ],
+      "it": {
+        "name": "Assistenza & Manutenzione",
+        "tagline": "Tengo il tuo sito aggiornato, sicuro e monitorato ogni mese: piccole fix, aggiornamenti contenuti, controlli di salute",
+        "description": "Un piano mensile che tiene il sito in salute: piccole fix, aggiornamenti di contenuti, controlli di backup e una linea diretta con me per il supporto. Disdici quando vuoi.",
+        "includes": [
+          "Piccole fix e ritocchi",
+          "Aggiornamenti dei contenuti (testi, prezzi, immagini)",
+          "Controllo di salute mensile",
+          "Linea di supporto prioritaria",
+          "Disdici quando vuoi"
+        ]
+      },
       "delivery": "ongoing",
       "cta": "Subscribe"
     },
@@ -229,6 +351,18 @@
         "Setup + hosting help",
         "Source handed over"
       ],
+      "it": {
+        "name": "Bot Telegram & Avvisi",
+        "tagline": "Un bot Telegram custom per avvisi, ordini e gestione dei gruppi — notifiche a ogni evento",
+        "description": "Un bot Telegram costruito attorno al tuo flusso di lavoro: avvisi istantanei, gestione ordini, messaggi programmati e strumenti per i gruppi. Configurato, ospitato e consegnato pronto.",
+        "includes": [
+          "Comandi personalizzati",
+          "Avvisi e notifiche",
+          "Flusso ordini / messaggi programmati",
+          "Setup + aiuto con l'hosting",
+          "Sorgente consegnata"
+        ]
+      },
       "delivery": "4–7 days",
       "cta": "Order"
     },
@@ -249,6 +383,18 @@
         "Push notifications (where supported)",
         "Deploy included"
       ],
+      "it": {
+        "name": "Web App (PWA)",
+        "tagline": "Una web app installabile che si comporta da app nativa su ogni telefono: veloce, pronta offline, pronta al push",
+        "description": "Una vera applicazione nel browser: installabile da qualunque telefono, funziona offline nelle parti essenziali, con UI mobile-first e salvataggio dati semplice.",
+        "includes": [
+          "PWA installabile (home screen)",
+          "Modalità offline per le pagine chiave",
+          "UI mobile-first",
+          "Notifiche push (dove supportate)",
+          "Deploy incluso"
+        ]
+      },
       "delivery": "10–14 days",
       "cta": "Order"
     }
