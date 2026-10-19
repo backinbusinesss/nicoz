@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "updated": "2026-10-19",
+  "currency": "$",
+  "_note": "Bundles combine products from products.json. `value` is the sum of the included product prices; `price` is the bundle price. Edit here when prices change in products.json.",
+  "bundles": [
+    {
+      "id": "b01",
+      "slug": "starter",
+      "name": "Starter",
+      "emoji": "🌱",
+      "price": 130,
+      "includes": ["static-website", "brand-kit", "seo-speed"],
+      "tagline": "Everything you need to get online fast: site, logo and SEO base.",
+      "cta": "Start here"
+    },
+    {
+      "id": "b02",
+      "slug": "community",
+      "name": "Community",
+      "emoji": "🤝",
+      "price": 150,
+      "includes": ["static-website", "discord-bot", "seo-speed"],
+      "tagline": "Site, community bot and SEO base: everything a team or club needs.",
+      "cta": "Build my community"
+    },
+    {
+      "id": "b03",
+      "slug": "mobile",
+      "name": "Mobile",
+      "emoji": "📱",
+      "price": 250,
+      "includes": ["static-website", "ecommerce", "custom-design"],
+      "tagline": "Mobile-first online store: design, pages and direct ordering.",
+      "cta": "Sell on mobile"
+    },
+    {
+      "id": "b04",
+      "slug": "full-stack",
+      "name": "Full Stack",
+      "emoji": "⚙️",
+      "price": 290,
+      "includes": ["static-website", "cms-admin", "discord-bot", "seo-speed"],
+      "tagline": "Website, admin panel and community bot, all connected.",
+      "cta": "Get the stack"
+    },
+    {
+      "id": "b05",
+      "slug": "everything",
+      "name": "Everything",
+      "emoji": "💎",
+      "price": 540,
+      "includes": ["one-page-landing", "static-website", "custom-design", "brand-kit", "seo-speed", "3d-motion", "cms-admin", "ecommerce", "discord-bot", "telegram-bot", "web-app-pwa"],
+      "tagline": "Every product in the catalog, bundled and delivered in order.",
+      "cta": "Take it all"
+    }
+  ]
+}
