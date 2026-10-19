@@ -43,7 +43,8 @@
     'head > title': {
       home: S(['Nicoz — Web Developer & Designer', 'Nicoz — Web Developer & Designer']),
       catalogo: S(['Nicoz — Services & Pricing', 'Nicoz — Servizi e Prezzi']),
-      build: S(['Nicoz — Build Your Idea', 'Nicoz — Realizza la tua idea'])
+      build: S(['Nicoz — Build Your Idea', 'Nicoz — Realizza la tua idea']),
+      demo: S(['Nicoz — Live demos', 'Nicoz — Demo dal vivo'])
     },
 
     /* nav (first two links shared by every page) */
@@ -364,6 +365,15 @@
         'Consiglio: conserva il numero di riferimento — citalo in ogni follow-up. ' +
         'Puoi anche raggiungere Nicoz direttamente su ' +
         '<a href="mailto:nicoz@secria.me" style="color: var(--mint);">nicoz@secria.me</a>.'])
+    },
+
+    demo: {
+      '#nav .nav-links a:nth-of-type(3)': S(['Contact', 'Contatti']),
+      '#nav .nav-cta': S(['Catalog', 'Catalogo']),
+      '#nav-panel .nav-panel-links a:nth-of-type(3)': S(['Contact', 'Contatti']),
+
+      '.demo-head .eyebrow': null, /* blink-dot below */
+      '#d-all-label': S(['All website demos', 'Tutte le demo website'])
     }
   };
 
@@ -371,7 +381,9 @@
   const HTML_TEXT = {
     home:     { 'hero .hero-eyebrow':            ['Available for work', 'Disponibile a lavorare'] },
     catalogo: { '.c-hero .eyebrow':              [' Services &amp; pricing', ' Servizi e prezzi'] },
-    build:    { '.wiz-head .eyebrow':            [' Build your idea', ' Realizza la tua idea'] }
+    build:    { '.wiz-head .eyebrow':            [' Build your idea', ' Realizza la tua idea'] },
+    demo:     { '.demo-head .eyebrow':           [' Live demo — everything runs in your browser',
+                                                 ' Demo dal vivo — tutto gira nel tuo browser'] }
   };
 
   /* ── engine ───────────────────────────────────────────── */

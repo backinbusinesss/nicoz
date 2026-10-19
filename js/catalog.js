@@ -87,6 +87,12 @@
         ' (' + fmt(p.price) + (p.billing === 'monthly' ? '/month' : '') + ').';
     const upsell = p.upsell
       ? '<span class="c-card-upsell">' + p.upsell + '</span>' : '';
+    const demoLink = prod.demo
+      ? '<a class="c-card-demo" href="demo?product=' + encodeURIComponent(prod.slug) + '">' +
+          '<span class="c-demo-dot" aria-hidden="true"></span>' +
+          pick('Live demo', 'Demo dal vivo') +
+        '</a>'
+      : '';
     return (
       '<article class="c-card">' +
         '<span class="c-card-emoji" aria-hidden="true">' + p.emoji + '</span>' +
@@ -100,6 +106,7 @@
           '<span class="price">' + fmt(p.price) + '</span>' +
           '<span class="c-badge">' + badge + ' · ' + p.delivery + '</span>' +
         '</div>' +
+        demoLink +
         '<div class="c-card-actions">' +
           '<a class="btn btn-solid" target="_blank" rel="noopener"' +
              ' aria-label="Order ' + p.name + ' on WhatsApp"' +

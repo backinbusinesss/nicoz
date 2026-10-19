@@ -205,6 +205,39 @@
 .c-card-actions { display: flex; gap: .55rem; flex-wrap: wrap; }
 .c-card-actions .btn { padding: .6rem 1.15rem; font-size: .8125rem; }
 
+/* live demo link (products.json → demo: true) */
+.c-card-demo {
+  display: inline-flex; align-items: center; gap: .5rem;
+  align-self: flex-start;
+  font-family: var(--font-m);
+  font-size: .62rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--white);
+  background: rgba(124, 58, 237, .18);
+  border: 1px solid rgba(124, 58, 237, .55);
+  border-radius: var(--r-pill);
+  padding: .42rem .95rem;
+  transition: background .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease);
+}
+.c-card-demo:hover {
+  background: rgba(124, 58, 237, .38);
+  border-color: var(--violet);
+  transform: translateY(-1px);
+}
+.c-demo-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 0 0 rgba(52, 211, 153, .6);
+  animation: cDemoPulse 2.2s infinite;
+}
+@keyframes cDemoPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(52, 211, 153, .55); }
+  70%  { box-shadow: 0 0 0 7px rgba(52, 211, 153, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .c-demo-dot { animation: none; }
+}
+
 /* bundles — highlighted variant */
 .c-bundle-grid {
   display: grid;
@@ -696,3 +729,34 @@ input.invalid, textarea.invalid {
   display: flex;
   flex-direction: column;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   LEGAL PAGES — native cursor fix
+   css/style.css hides the native cursor site-wide
+   (`body, a, button, label, input { cursor: none }`) because a
+   custom #cursor element takes over. The legal pages disable that
+   custom cursor (.legal-page #cursor { display: none }) but do not
+   ship a #cursor element at all, so the pointer vanished over
+   links, buttons and labels. Restore the native cursor there.
+   ═══════════════════════════════════════════════════════════ */
+.legal-page a,
+.legal-page button,
+.legal-page summary,
+.legal-page label,
+.legal-page input,
+.legal-page select,
+.legal-page textarea,
+.legal-page code,
+.legal-page pre,
+.legal-page .toggle,
+.legal-page .switch {
+  cursor: auto;
+}
+.legal-page a,
+.legal-page button,
+.legal-page summary,
+.legal-page .toggle,
+.legal-page .switch {
+  cursor: pointer;
+}
+.legal-page .switch { cursor: pointer; }

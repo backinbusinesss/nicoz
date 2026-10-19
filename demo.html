@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nicoz — Live demos</title>
+  <meta name="description" content="Interactive live demos of every Nicoz service: landing pages, websites, brand kits, SEO, 3D, CMS, e-commerce, bots, PWA. Try before you order." />
+  <meta name="theme-color" content="#08080c" />
+  <meta name="color-scheme" content="dark" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Nicoz — Live demos" />
+  <meta property="og:description" content="Try a live demo of every service before you order." />
+  <meta property="og:url" content="https://nicozdev.online/demo" />
+  <meta property="og:image" content="https://nicozdev.online/img/og-icon.png" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png" />
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/catalog.css" />
+  <link rel="stylesheet" href="css/demos.css" />
+  <script src="js/i18n.js"></script>
+</head>
+<body data-page="demo">
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ══ AMBIENT LAYERS ══ -->
+  <div id="spotlight" aria-hidden="true"></div>
+  <div id="cursor" aria-hidden="true"><span class="cursor-dot"></span></div>
+
+  <!-- ══ HEADER ══ -->
+  <header id="nav">
+    <div class="nav-inner">
+      <a href="./" class="nav-logo" aria-label="Nicoz — home">
+        <span class="nav-logo-mark">NZ</span>
+        <span class="nav-logo-word">Nicoz</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="./#projects" class="nav-link">Work</a>
+        <a href="catalogo" class="nav-link">Services</a>
+        <a href="./#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-end">
+        <a href="catalogo" class="btn btn-ghost nav-cta">Catalog</a>
+        <button id="nav-toggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div id="nav-panel" class="nav-panel" aria-hidden="true">
+    <nav class="nav-panel-links" aria-label="Mobile">
+      <a href="./#projects"><em>01</em>Work</a>
+      <a href="catalogo"><em>02</em>Services</a>
+      <a href="./#contact"><em>03</em>Contact</a>
+    </nav>
+    <div class="nav-panel-foot">
+      <a href="https://t.me/creditate" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://github.com/backinbusinesss" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://discord.com/users/1417869399423062197" target="_blank" rel="noopener">Discord</a>
+    </div>
+  </div>
+
+  <main id="main" class="c-main">
+
+    <!-- ═══════════════════════════════
+         DEMO HERO
+    ═══════════════════════════════ -->
+    <section class="container demo-head">
+      <div data-reveal>
+        <p class="eyebrow"><span class="blink-dot"></span> Live demo — everything runs in your browser</p>
+        <h1 class="h2" id="d-title">Demo</h1>
+        <p class="demo-sub" id="d-sub"></p>
+        <div class="demo-badges" id="d-badges"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════
+         STAGE (mock browser)
+    ═══════════════════════════════ -->
+    <section class="container" data-reveal>
+      <div class="d-stage">
+        <div class="d-frame" id="d-frame">
+          <div class="d-frame-bar" aria-hidden="true">
+            <span class="d-dots"><i></i><i></i><i></i></span>
+            <span class="d-frame-url" id="d-url">demo.nicozdev.online</span>
+            <span class="d-frame-tag" id="d-tag">interactive</span>
+          </div>
+          <div class="d-view" id="d-view"></div>
+        </div>
+      </div>
+
+      <div class="demo-cta-row">
+        <a class="btn btn-solid" id="d-order" target="_blank" rel="noopener" data-magnetic>
+          <span id="d-order-label">Order this</span>
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.19L10.47 5.53a.75.75 0 111.06-1.06l5 5a.75.75 0 010 1.06l-5 5a.75.75 0 11-1.06-1.06l3.47-3.47H3.75A.75.75 0 013 10z" clip-rule="evenodd"/></svg>
+        </a>
+        <a class="btn btn-ghost" id="d-build" data-magnetic>Request it</a>
+        <span class="demo-note" id="d-note"></span>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════
+         ALL DEMOS
+    ═══════════════════════════════ -->
+    <section class="container demo-all" data-reveal>
+      <p class="eyebrow" id="d-all-label">All demos</p>
+      <div class="d-switcher" id="d-switcher"></div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════
+       FOOTER
+  ═══════════════════════════════ -->
+  <footer id="footer">
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+        <a href="./" class="nav-logo" aria-label="Nicoz — home">
+          <span class="nav-logo-mark">NZ</span>
+          <span class="nav-logo-word">Nicoz</span>
+        </a>
+        <p class="footer-tag">Independent web developer &amp; designer. Design and code, same pair of hands.</p>
+      </div>
+
+      <nav class="footer-col" aria-label="Footer sitemap">
+        <h4>Sitemap</h4>
+        <a href="./#projects">Work</a>
+        <a href="catalogo">Services</a>
+        <a href="build">Build your idea</a>
+        <a href="./#contact">Contact</a>
+      </nav>
+
+      <nav class="footer-col" aria-label="Footer social">
+        <h4>Social</h4>
+        <a href="https://t.me/creditate" target="_blank" rel="noopener">Telegram <span>@creditate</span></a>
+        <a href="https://github.com/backinbusinesss" target="_blank" rel="noopener">GitHub <span>@backinbusinesss</span></a>
+        <a href="https://discord.com/users/1417869399423062197" target="_blank" rel="noopener">Discord <span>@ragefuck</span></a>
+        <a href="https://wa.me/18734741519" target="_blank" rel="noopener">WhatsApp <span>+1 (873) 474-1519</span></a>
+      </nav>
+
+      <div class="footer-col" aria-label="Footer legal">
+        <h4>Legale</h4>
+        <a href="termini">Termini e Condizioni</a>
+        <a href="cookie">Cookie Policy</a>
+        <a href="cookie#preferenze" data-open-consent>Preferenze di Privacy</a>
+      </div>
+
+    </div>
+
+    <div class="container footer-legal">
+      <p class="footer-vat">
+        &copy; 2026 Nicoz &nbsp;-&nbsp; P.IVA e C.F. <span class="selectable">XX</span>
+        &nbsp;-&nbsp;
+        <a href="termini">Termini e Condizioni</a>
+        &nbsp;-&nbsp;
+        <a href="cookie">Cookie Policy</a>
+        &nbsp;-&nbsp;
+        <a href="mailto:nicoz@secria.me">nicoz@secria.me</a>
+        &nbsp;-&nbsp;
+        <a href="#" data-open-consent>Preferenze di privacy</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- ══ CONSENT BANNER ══ -->
+  <div id="consent" class="consent" role="dialog" aria-modal="false" aria-labelledby="consent-title" aria-hidden="true">
+    <div class="consent-inner">
+      <div class="consent-copy">
+        <h3 id="consent-title">Cookie &amp; privacy</h3>
+        <p>
+          This site only stores your consent choice on this device.
+          No analytics or advertising cookies are set.
+          Read the <a href="cookie">Cookie Policy</a>.
+        </p>
+      </div>
+      <div class="consent-actions">
+        <button class="btn btn-ghost" data-consent="essential">Essential only</button>
+        <button class="btn btn-ghost" data-open-consent>Preferences</button>
+        <button class="btn btn-solid" data-consent="all">Accept all</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ CONSENT PREFERENCES MODAL ══ -->
+  <div id="consent-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-panel">
+      <header class="modal-head">
+        <h3 id="modal-title">Privacy preferences</h3>
+        <button class="modal-close" data-close-modal aria-label="Close preferences">✕</button>
+      </header>
+
+      <div class="modal-body">
+        <label class="toggle is-locked">
+          <span>
+            <b>Strictly necessary</b>
+            <i>Required to remember this choice. Always active.</i>
+          </span>
+          <input type="checkbox" checked disabled />
+          <em class="switch" aria-hidden="true"></em>
+        </label>
+
+        <label class="toggle">
+          <span>
+            <b>Experience</b>
+            <i>Remembers interface preferences such as reduced motion.</i>
+          </span>
+          <input type="checkbox" data-consent-key="experience" />
+          <em class="switch" aria-hidden="true"></em>
+        </label>
+
+        <label class="toggle">
+          <span>
+            <b>Analytics</b>
+            <i>Reserved. No analytics tool is installed on this site today.</i>
+          </span>
+          <input type="checkbox" data-consent-key="analytics" />
+          <em class="switch" aria-hidden="true"></em>
+        </label>
+
+        <p class="modal-foot">
+          Full detail in the <a href="cookie">Cookie Policy</a>.
+          You can change this at any time from the footer.
+        </p>
+      </div>
+
+      <footer class="modal-actions">
+        <button class="btn btn-ghost" data-consent="essential">Essential only</button>
+        <button class="btn btn-solid" data-consent="save">Save preferences</button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/fab.js"></script>
+  <script src="js/demos.js"></script>
+</body>
+</html>
