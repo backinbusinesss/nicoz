@@ -92,7 +92,7 @@
              ' href="' + waLink(waMsg) + '">Order' +
              ICON_ARROW +
           '</a>' +
-          '<a class="btn btn-ghost" href="build.html?product=' + encodeURIComponent(prod.slug) + '">' +
+          '<a class="btn btn-ghost" href="build?product=' + encodeURIComponent(prod.slug) + '">' +
             'Request it' +
           '</a>' +
         '</div>' +
@@ -191,7 +191,7 @@
                ' href="' + waLink('Hi Nicoz! I am interested in the ' + bundle.name + ' bundle (' + fmt(bundle.price) + ').') + '">' +
               'WhatsApp' + ICON_WA +
             '</a>' +
-            '<a class="btn btn-ghost" href="build.html?bundle=' + encodeURIComponent(bundle.slug) + '">' +
+            '<a class="btn btn-ghost" href="build?bundle=' + encodeURIComponent(bundle.slug) + '">' +
               'Request it' +
             '</a>' +
           '</div>' +

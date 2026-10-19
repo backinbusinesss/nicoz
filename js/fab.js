@@ -11,7 +11,7 @@
 
   const a = document.createElement('a');
   a.className = 'fab';
-  a.href = 'build.html';
+  a.href = 'build';
   a.setAttribute('aria-label', 'Build your idea — start a project request');
   a.innerHTML =
     '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +

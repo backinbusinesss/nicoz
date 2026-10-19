@@ -74,6 +74,8 @@ npx serve .
 ```
 
 Then open `http://localhost:8000/catalogo.html`.
+(GitHub Pages also serves the pages without the `.html` extension — the site
+links use clean URLs like `/catalogo`.)
 
 ## Deploy
 
